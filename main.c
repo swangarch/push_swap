@@ -49,7 +49,7 @@ int	*save_inputs(int *inputs, int argc, char **argv, int i)
 	}
 	return (inputs);
 }
-
+/*
 int	main(int argc, char **argv)
 {
 	int	i;
@@ -100,7 +100,7 @@ int	main(int argc, char **argv)
 	free(inputs);
 	return (0);
 }
-/*
+*/
 int	main(int argc, char **argv)
 {
 	int	i;
@@ -111,6 +111,11 @@ int	main(int argc, char **argv)
 	lsta = NULL;
 	lstb = NULL;
 	i = 1;
+	if (argc < 2)
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	}
 	inputs = malloc(sizeof(int) * (argc - 1));
 	if (inputs == NULL)
 	{
@@ -141,32 +146,32 @@ int	main(int argc, char **argv)
 		ft_lstadd_back(&lsta, ft_lstnew((void *) (&inputs[i])));  //此处如果lstnew fail 有可能leak
 		i++;
 	}
-	ft_printf("START\n");
-	print_stack(lsta, lstb);
-	ft_printf("_________________________________________\n");
+	//ft_printf("START\n");
+	//print_stack(lsta, lstb);
+	//ft_printf("_________________________________________\n");
 	sa(&lsta, &lstb);
-	print_stack(lsta, lstb);
+	//print_stack(lsta, lstb);
 	pb(&lsta, &lstb);
-	print_stack(lsta, lstb);
+	//print_stack(lsta, lstb);
 	pb(&lsta, &lstb);
-	print_stack(lsta, lstb);
+	//print_stack(lsta, lstb);
 	pb(&lsta, &lstb);
-	print_stack(lsta, lstb);
+	//print_stack(lsta, lstb);
 	rrb(&lsta, &lstb);
-	print_stack(lsta, lstb);
+	//print_stack(lsta, lstb);
 	rra(&lsta, &lstb);
-	print_stack(lsta, lstb);
+	//print_stack(lsta, lstb);
 	pa(&lsta, &lstb);
-	print_stack(lsta, lstb);
+	//print_stack(lsta, lstb);
 	ra(&lsta, &lstb);
-	print_stack(lsta, lstb);
+	//print_stack(lsta, lstb);
 	rb(&lsta, &lstb);
-	print_stack(lsta, lstb);
+	//print_stack(lsta, lstb);
 	pa(&lsta, &lstb);
-	print_stack(lsta, lstb);
+	//print_stack(lsta, lstb);
 	pa(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	ft_lstclear_free(&lsta);
+	//print_stack(lsta, lstb);
+	//ft_lstclear_free(&lsta);
 	free(inputs);
 	return (0);
-}*/
+}
