@@ -50,73 +50,42 @@ int	*save_inputs(int *inputs, int argc, char **argv, int i)
 	return (inputs);
 }
 
-int	main(int argc, char **argv)
+void	push_swap(t_list *lsta, t_list *lstb)
 {
-	int	i;
-	int	*inputs;
-	t_list	*lsta;
-	t_list	*lstb;
-
-	lsta = NULL;
-	lstb = NULL;
-	inputs = save_inputs(inputs, argc, argv, 1);
-	if (inputs == NULL)
-		return (1);
-	i = 0;
-	while (i < argc - 1)
-	{
-		ft_lstadd_back(&lsta, ft_lstnew((void *) (&inputs[i])));  //此处如果lstnew fail 有可能leak并且数据错误，因此应该报错并且释放
-		i++;
-	}
-
 	ft_printf("START\n");
-	print_stack(lsta, lstb);
-	ft_printf("_________________________________________\n");
-	sa(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	pb(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	pb(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	pb(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	rrb(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	rra(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	pa(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	ra(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	rb(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	pa(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	pa(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	
-	ft_printf("List sorted: %s\n", (lst_sorted(lsta) ? "Yes" : "No"));
-	ft_lstclear_nfunc(&lsta);
-	free(inputs);
-	return (0);
+        print_stack(lsta, lstb);
+        ft_printf("_________________________________________\n");
+        sa(&lsta, &lstb);
+        print_stack(lsta, lstb);
+        pb(&lsta, &lstb);
+        print_stack(lsta, lstb);
+        pb(&lsta, &lstb);
+        print_stack(lsta, lstb);
+        pb(&lsta, &lstb);
+        print_stack(lsta, lstb);
+        rrb(&lsta, &lstb);
+        print_stack(lsta, lstb);
+        rra(&lsta, &lstb);
+        print_stack(lsta, lstb);
+        pa(&lsta, &lstb);
+        print_stack(lsta, lstb);
+        ra(&lsta, &lstb);
+        print_stack(lsta, lstb);
+        rb(&lsta, &lstb);
+        print_stack(lsta, lstb);
+        pa(&lsta, &lstb);
+        print_stack(lsta, lstb);
+        pa(&lsta, &lstb);
+        print_stack(lsta, lstb);
+
+        ft_printf("List sorted: %s\n", (lst_sorted(lsta) ? "Yes" : "No"));
 }
-/*
-int	main(int argc, char **argv)
+
+int	input_error(int argc, char **argv, int *inputs)
 {
 	int	i;
-	int	*inputs;
-	t_list	*lsta;
-	t_list	*lstb;
 
-	lsta = NULL;
-	lstb = NULL;
 	i = 1;
-	inputs = malloc(sizeof(int) * (argc - 1));
-	if (inputs == NULL)
-	{
-		write(2, "Error\n", 6);
-		return (1);
-	}
 	while(i < argc)
 	{
 		if (all_digits(argv[i]) && !int_overflow(argv[i]))
@@ -135,38 +104,47 @@ int	main(int argc, char **argv)
 		free(inputs);
 		return (1);
 	}
+	return (0);
+}
+/*
+void	copy_to_lst(t_list **lst, int *inputs, int argc)
+{
+	int	i;
 	i = 0;
 	while (i < argc - 1)
 	{
 		ft_lstadd_back(&lsta, ft_lstnew((void *) (&inputs[i])));  //此处如果lstnew fail 有可能leak
 		i++;
 	}
-	ft_printf("START\n");
-	print_stack(lsta, lstb);
-	ft_printf("_________________________________________\n");
-	sa(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	pb(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	pb(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	pb(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	rrb(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	rra(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	pa(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	ra(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	rb(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	pa(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	pa(&lsta, &lstb);
-	print_stack(lsta, lstb);
-	ft_lstclear_free(&lsta);
+	free(inputs);
+}*/
+
+int	main(int argc, char **argv)
+{
+	int	i;
+	int	*inputs;
+	t_list	*lsta;
+	t_list	*lstb;
+
+	lsta = NULL;
+	lstb = NULL;
+	inputs = malloc(sizeof(int) * (argc - 1));
+	if (inputs == NULL)
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	}
+	if (input_error(argc, argv, inputs))
+		return (1);
+	
+	i = 0;
+	while (i < argc - 1)
+	{
+		ft_lstadd_back(&lsta, ft_lstnew((void *) (&inputs[i])));  //此处如果lstnew fail 有可能leak
+		i++;
+	}
+	push_swap(lsta, lstb);
+	ft_lstclear_nfunc(&lsta);
 	free(inputs);
 	return (0);
-}*/
+}
