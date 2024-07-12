@@ -1,0 +1,1 @@
+cc push_swap.c push_swap_utils.c main.c libft.a -o push_swap
