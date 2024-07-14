@@ -10,26 +10,34 @@ void	lst_sort(t_list **lsta, t_list **lstb)
 
 	if (size >= 2)
 	{
-		while (i < size / 2)/*先随机等分成两组*/
+        /*
+		while (i < size / 2)先随机等分成两组
 		{
             pb(lsta, lstb);
             print_stack(*lsta, *lstb);
 			i++;
 		}
+        */
         i = 0;
 
-        while (i < ft_lstsize(*lsta) * ft_lstsize(*lsta))
+        while (i < ft_lstsize(*lsta) * ft_lstsize(*lsta) * ft_lstsize(*lsta))
         {
             if (*((int *)((*lsta)->content)) > *((int *)((*lsta)->next->content)))
 	        {
-		        ra(lsta, lstb);
+                sa(lsta, lstb);
+		        rra(lsta, lstb);
             }
             else
 	        {
-		        sa(lsta, lstb);
-                ra(lsta, lstb);
+		        rra(lsta, lstb);
             }
             print_stack(*lsta, *lstb);
+            if (lst_sorted(*lsta))
+            {
+                ft_printf("Sorted\n");
+                print_stack(*lsta, *lstb);
+                return;
+            }
             i++;
         }
     }    

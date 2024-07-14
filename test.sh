@@ -6,6 +6,10 @@
 
 #./push_swap $ARGS
 
+#ARGS="5 18 4 2 14 8 7 12 10 0 3 16 1 9 6 11 15 19 17 13"
+#./push_swap $ARGS
+
+#ARGS="6 8 11 5 7"
 ARGS="5 18 4 2 14 8 7 12 10 0 3 16 1 9 6 11 15 19 17 13"
 ./push_swap $ARGS
 
