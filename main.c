@@ -49,7 +49,7 @@ int	*save_inputs(int *inputs, int argc, char **argv, int i)
 	}
 	return (inputs);
 }
-
+/*
 void	push_swap(t_list *lsta, t_list *lstb)
 {
 	ft_printf("START\n");
@@ -79,6 +79,17 @@ void	push_swap(t_list *lsta, t_list *lstb)
         print_stack(lsta, lstb);
 
         ft_printf("List sorted: %s\n", (lst_sorted(lsta) ? "Yes" : "No"));
+}*/
+
+void	push_swap(t_list *lsta, t_list *lstb)
+{
+	ft_printf("START\n");
+    ft_printf("_________________________________________\n");
+        
+	lst_sort(&lsta, &lstb);
+
+	ft_printf("STOP\n");
+    ft_printf("_________________________________________\n");
 }
 
 int	input_error(int argc, char **argv, int *inputs)
@@ -106,18 +117,6 @@ int	input_error(int argc, char **argv, int *inputs)
 	}
 	return (0);
 }
-/*
-void	copy_to_lst(t_list **lst, int *inputs, int argc)
-{
-	int	i;
-	i = 0;
-	while (i < argc - 1)
-	{
-		ft_lstadd_back(&lsta, ft_lstnew((void *) (&inputs[i])));  //此处如果lstnew fail 有可能leak
-		i++;
-	}
-	free(inputs);
-}*/
 
 int	main(int argc, char **argv)
 {
