@@ -41,47 +41,14 @@ int	*save_inputs(int *inputs, int argc, char **argv, int i)
 	}
 	return (inputs);
 }
-/*
-void	push_swap(t_list *lsta, t_list *lstb)
-{
-	ft_printf("START\n");
-        print_stack(lsta, lstb);
-        ft_printf("_________________________________________\n");
-        sa(&lsta, &lstb);
-        print_stack(lsta, lstb);
-        pb(&lsta, &lstb);
-        print_stack(lsta, lstb);
-        pb(&lsta, &lstb);
-        print_stack(lsta, lstb);
-        pb(&lsta, &lstb);
-        print_stack(lsta, lstb);
-        rrb(&lsta, &lstb);
-        print_stack(lsta, lstb);
-        rra(&lsta, &lstb);
-        print_stack(lsta, lstb);
-        pa(&lsta, &lstb);
-        print_stack(lsta, lstb);
-        ra(&lsta, &lstb);
-        print_stack(lsta, lstb);
-        rb(&lsta, &lstb);
-        print_stack(lsta, lstb);
-        pa(&lsta, &lstb);
-        print_stack(lsta, lstb);
-        pa(&lsta, &lstb);
-        print_stack(lsta, lstb);
-
-        ft_printf("List sorted: %s\n", (lst_sorted(lsta) ? "Yes" : "No"));
-}*/
 
 void	push_swap(t_list *lsta, t_list *lstb)
 {
-	ft_printf("START\n");
-    ft_printf("_________________________________________\n");
-        
+	ft_printf("START_________________________________________\n");
+
 	lst_sort(&lsta, &lstb);
 
-	ft_printf("STOP\n");
-    ft_printf("_________________________________________\n");
+	ft_printf("STOP__________________________________________\n");
 }
 
 int	input_error(int argc, char **argv, int *inputs)

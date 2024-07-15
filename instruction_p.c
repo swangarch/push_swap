@@ -13,14 +13,12 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
-static void    p(t_list **lst1, t_list **lst2)
+static void p(t_list **lst1, t_list **lst2)
 {
     t_list  *temp;
 
     if (ft_lstsize(*lst1) == 0)
-    {
         return ;
-    }
     temp = *lst1;
     *lst1 = (*lst1)->next;
     ft_lstadd_front(lst2, temp);
