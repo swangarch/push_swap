@@ -11,15 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
-
-void	print_stack(t_list *lsta, t_list *lstb)
-{
-	ft_printf("stack a: ");
-	lst_print(lsta);
-	ft_printf("stack b: ");
-	lst_print(lstb);
-}
+#include "libft/libft.h"
 
 int	*save_inputs(int *inputs, int argc, char **argv, int i)
 {
