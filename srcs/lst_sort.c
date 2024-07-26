@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft/libft.h"
 
 void	lst_sort(t_list **lsta, t_list **lstb)
 {
@@ -78,7 +77,7 @@ void	lst_sort(t_list **lsta, t_list **lstb)
             i++;
         }*/
     }    
-    ft_printf("\nstack sorted: %s\n", (lst_sorted(*lsta) ? "Yes" : "No"));
-	ft_printf("stack a size is %d\n", ft_lstsize(*lsta));
+    ft_printf("________stack sorted: %s\n", (lst_sorted(*lsta) ? "Yes" : "No"));
+	ft_printf("________stack a size is %d\n", ft_lstsize(*lsta));
 }
 

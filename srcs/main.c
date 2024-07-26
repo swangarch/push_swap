@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft/libft.h"
 
 int	*save_inputs(int *inputs, int argc, char **argv, int i)
 {
@@ -44,11 +43,11 @@ int	*save_inputs(int *inputs, int argc, char **argv, int i)
 
 void	push_swap(t_list *lsta, t_list *lstb)
 {
-	ft_printf("START_________________________________________\n");
+	ft_printf("________START_sort_stack________________________________________\n");
 
 	lst_sort(&lsta, &lstb);
 
-	ft_printf("STOP__________________________________________\n");
+	ft_printf("________STOP_sort_stack_________________________________________\n");
 }
 
 int	input_error(int argc, char **argv, int *inputs)
