@@ -94,7 +94,6 @@ int	main(int argc, char **argv)
 	}
 	if (input_error(argc, argv, inputs))
 		return (1);
-	
 	i = 0;
 	while (i < argc - 1)
 	{

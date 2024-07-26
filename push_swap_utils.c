@@ -13,30 +13,6 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
-int ft_lstsize(t_list *lst)
-{
-	int		c;
-	t_list	*current;
-
-	c = 0;
-	current = lst;
-	while (current != NULL)
-	{
-		current = current->next;
-		c++;
-	}
-	return (c);
-}
-
-void	ft_lstadd_front(t_list **lst, t_list *new)
-{
-	if (new != NULL)
-	{
-		new->next = *lst;
-		*lst = new;
-	}
-}
-
 int	lst_sorted(t_list *lst)
 {
 	t_list *currnode;
