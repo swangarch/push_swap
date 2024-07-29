@@ -24,7 +24,7 @@ int	lst_sorted(t_list *lst)
         if (*((int *)(currnode->content)) > *((int *)(currnode->next->content)))
             return (0);
         currnode = currnode->next;
-    } 
+    }
     return (1);
 }
 

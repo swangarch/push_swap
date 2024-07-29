@@ -49,6 +49,7 @@ void	lst_sort(t_list **lsta, t_list **lstb)
         }
         /*initialize——————————————————————————————————————————————————————*/
         
+        /*push a to b——————————————————————————————————————————————————————*/
         while (i < size - 2)
         {
             count = 0;
@@ -65,6 +66,7 @@ void	lst_sort(t_list **lsta, t_list **lstb)
             }
             i++;
         }
+        /*push a to b——————————————————————————————————————————————————————*/
 
         int j = 0;
         while (j < size)
