@@ -23,55 +23,138 @@ int     lst_value(t_list **lst)
     }
 }
 
+
 void	lst_sort(t_list **lsta, t_list **lstb)
 {
 	int	size = ft_lstsize(*lsta);
     
 	int	i = 0;
     int count = 0;
+    int average = 50; //中位数
 	
+    int size2 = ft_lstsize(*lsta);
 	//ft_printf("list a size is %d\n", size);
 	if (size < 2)
 		return ;
 	else
 	{
-        /*initialize——————————————————————————————————————————————————————*/
-        if (lst_value(lsta) > lst_value(&((*lsta)->next)))
-        {
-            sa(lsta, lstb);
-            pb(lsta, lstb);
-            pb(lsta, lstb);
-        }
-        else
-        {
-            pb(lsta, lstb);
-            pb(lsta, lstb);
-        }
-        /*initialize——————————————————————————————————————————————————————*/
         
-        while (i < size - 2)
+        i = 0;
+        size2 = ft_lstsize(*lsta);
+        while (i < size2)
         {
-            count = 0;
-            while (lst_value(lsta) < lst_value(lstb) && count < ft_lstsize(*lstb))
-            {
-                rb(lsta, lstb);
-                count++;
-            }
-            pb(lsta, lstb);
-            while (count > 0)
-            {
-                rrb(lsta, lstb);
-                count--;
-            }
+            if (lst_value(lsta) < average * 0.3)
+                pb(lsta, lstb);
+            else
+                ra(lsta, lstb);
             i++;
         }
 
+        i = 0;
+        size2 = ft_lstsize(*lsta);
+        while (i < size2)
+        {
+            if (lst_value(lsta) < average * 0.6)
+                pb(lsta, lstb);
+            else
+                ra(lsta, lstb);
+            i++;
+        }
+
+        i = 0;
+        size2 = ft_lstsize(*lsta);
+        while (i < size2)
+        {
+            if (lst_value(lsta) < average * 0.9)
+                pb(lsta, lstb);
+            else
+                ra(lsta, lstb);
+            i++;
+        }
+
+        i = 0;
+        size2 = ft_lstsize(*lsta);
+        while (i < size2)
+        {
+            if (lst_value(lsta) < average * 1.2)
+                pb(lsta, lstb);
+            else
+                ra(lsta, lstb);
+            i++;
+        }
+
+        i = 0;
+        size2 = ft_lstsize(*lsta);
+        while (i < size2)
+        {
+            if (lst_value(lsta) < average * 1.5)
+                pb(lsta, lstb);
+            else
+                ra(lsta, lstb);
+            i++;
+        }
+
+        i = 0;
+        size2 = ft_lstsize(*lsta);
+        while (i < size2)
+        {
+            if (lst_value(lsta) < average * 1.8)
+                pb(lsta, lstb);
+            else
+                ra(lsta, lstb);
+            i++;
+        }
+
+        i = 0;
+        size2 = ft_lstsize(*lsta);
+        while (i < size2)
+        {
+            pb(lsta, lstb);
+            i++;
+        }
+        
+        /*initialize——————————————————————————————————————————————————————*/
+        if (lst_value(lstb) < lst_value(&((*lstb)->next)))
+        {
+            sb(lsta, lstb);
+            pa(lsta, lstb);
+            pa(lsta, lstb);
+        }
+        else
+        {
+            pa(lsta, lstb);
+            pa(lsta, lstb);
+        }
+        /*initialize——————————————————————————————————————————————————————*/
+
+        /*push b to a——————————————————————————————————————————————————————*/
+        i = 0;
+        while (i < size - 2)
+        {
+                count = 0;
+                while (lst_value(lsta) < lst_value(lstb) && count < ft_lstsize(*lsta))
+                {
+                    ra(lsta, lstb);
+                    count++;
+                }
+                pa(lsta, lstb);
+                while (count > 0)
+                {
+                    rra(lsta, lstb);
+                    count--;
+                }
+            i++;
+        }
+        /*push a to b——————————————————————————————————————————————————————*/
+
+        /*push b to a——————————————————————————————————————————————————————*/
         int j = 0;
         while (j < size)
         {
             pa(lsta, lstb);
             j++;
         }
+        /*push b to a——————————————————————————————————————————————————————*/
         print_stack(*lsta, *lstb);
     }    
     ft_printf("________stack sorted: %s\n", ((lst_sorted(*lsta) && size == ft_lstsize(*lsta)) ? "Yes" : "No"));
