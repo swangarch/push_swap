@@ -23,42 +23,90 @@ int     lst_value(t_list **lst)
     }
 }
 
-void    lst_stream(t_list **lsta, t_list **lstb, int factor)
-{
-    int size = ft_lstsize(*lsta);
-    int average = 250; //中位数
-
-    while (size > 0)
-    {
-        if (lst_value(lsta) < (average * factor / 100))
-            pb(lsta, lstb);
-        else
-            ra(lsta, lstb);
-        size--;
-    }
-}
 
 void	lst_sort(t_list **lsta, t_list **lstb)
 {
 	int	size = ft_lstsize(*lsta);
+    
 	int	i = 0;
     int count = 0;
+    int average = 500; //中位数
 	
+    int size2 = ft_lstsize(*lsta);
+	//ft_printf("list a size is %d\n", size);
 	if (size < 2)
 		return ;
 	else
 	{
-        int steps = 20;
-        int iteration = 200 / steps;
-
-        while (iteration < 200)
+        
+        i = 0;
+        size2 = ft_lstsize(*lsta);
+        while (i < size2)
         {
-            lst_stream(lsta, lstb, iteration);
-            iteration = iteration + 200 / steps;
+            if (lst_value(lsta) < average * 0.3)
+                pb(lsta, lstb);
+            else
+                ra(lsta, lstb);
+            i++;
         }
 
         i = 0;
-        int size2 = ft_lstsize(*lsta);
+        size2 = ft_lstsize(*lsta);
+        while (i < size2)
+        {
+            if (lst_value(lsta) < average * 0.6)
+                pb(lsta, lstb);
+            else
+                ra(lsta, lstb);
+            i++;
+        }
+
+        i = 0;
+        size2 = ft_lstsize(*lsta);
+        while (i < size2)
+        {
+            if (lst_value(lsta) < average * 0.9)
+                pb(lsta, lstb);
+            else
+                ra(lsta, lstb);
+            i++;
+        }
+
+        i = 0;
+        size2 = ft_lstsize(*lsta);
+        while (i < size2)
+        {
+            if (lst_value(lsta) < average * 1.2)
+                pb(lsta, lstb);
+            else
+                ra(lsta, lstb);
+            i++;
+        }
+
+        i = 0;
+        size2 = ft_lstsize(*lsta);
+        while (i < size2)
+        {
+            if (lst_value(lsta) < average * 1.5)
+                pb(lsta, lstb);
+            else
+                ra(lsta, lstb);
+            i++;
+        }
+
+        i = 0;
+        size2 = ft_lstsize(*lsta);
+        while (i < size2)
+        {
+            if (lst_value(lsta) < average * 1.8)
+                pb(lsta, lstb);
+            else
+                ra(lsta, lstb);
+            i++;
+        }
+
+        i = 0;
+        size2 = ft_lstsize(*lsta);
         while (i < size2)
         {
             pb(lsta, lstb);

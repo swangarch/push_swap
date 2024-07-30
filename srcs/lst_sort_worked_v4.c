@@ -26,12 +26,14 @@ int     lst_value(t_list **lst)
 void    lst_stream(t_list **lsta, t_list **lstb, int factor)
 {
     int size = ft_lstsize(*lsta);
-    int average = 250; //中位数
+    int average = 50; //中位数
 
     while (size > 0)
     {
         if (lst_value(lsta) < (average * factor / 100))
+        {
             pb(lsta, lstb);
+        }
         else
             ra(lsta, lstb);
         size--;
@@ -48,7 +50,7 @@ void	lst_sort(t_list **lsta, t_list **lstb)
 		return ;
 	else
 	{
-        int steps = 20;
+        int steps = 10;
         int iteration = 200 / steps;
 
         while (iteration < 200)
