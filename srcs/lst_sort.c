@@ -26,7 +26,7 @@ int     lst_value(t_list **lst)
 void    lst_stream(t_list **lsta, t_list **lstb, int factor)
 {
     int size = ft_lstsize(*lsta);
-    int average = 250; //中位数
+    int average = 50; //中位数
 
     while (size > 0)
     {
@@ -110,5 +110,4 @@ void	lst_sort(t_list **lsta, t_list **lstb)
         print_stack(*lsta, *lstb);
     }    
     ft_printf("________stack sorted: %s\n", ((lst_sorted(*lsta) && size == ft_lstsize(*lsta)) ? "Yes" : "No"));
-	//ft_printf("________stack a size is %d\n", ft_lstsize(*lsta));
 }

@@ -28,6 +28,20 @@ int	lst_sorted(t_list *lst)
     return (1);
 }
 
+void	free_tab(char **tab)
+{
+	int	i;
+
+	if (tab == NULL)
+		return ;
+	while(tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	tab = NULL;
+}
+
 void	print_stack(t_list *lsta, t_list *lstb)
 {
 	ft_printf("stack a: ");
