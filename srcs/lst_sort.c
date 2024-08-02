@@ -119,7 +119,6 @@ int     total_cost(t_list **lsta, t_list **lstb, int indexa)
 
     stepa = step_move_top(*lsta, indexa);
     stepb = step_move_top(*lstb, target_index(lsta, lstb, indexa));
-
     if (stepa * stepb > 0)
     {
         if (stepa > 0)
@@ -137,19 +136,8 @@ int     total_cost(t_list **lsta, t_list **lstb, int indexa)
                 return (ft_abs(stepa));
         }
     }
-
     return (ft_abs(stepa) + ft_abs(stepb));
 }
-/*
-int     total_cost(t_list **lsta, t_list **lstb, int indexa)
-{
-    int stepa;
-    int stepb;
-
-    stepa = ft_abs(step_move_top(*lsta, indexa));
-    stepb = ft_abs(step_move_top(*lstb, target_index(lsta, lstb, indexa)));
-    return (stepa + stepb);
-}*/
 
 int     min_cost_index(t_list **lsta, t_list **lstb)
 {
@@ -183,7 +171,6 @@ void    push_index(t_list **lsta, t_list **lstb)
     stepa = step_move_top(*lsta, indexa_topush);
     stepb = step_move_top(*lstb, target_index(lsta, lstb, indexa_topush));
 
-    /////
     while (stepa > 0 && stepb > 0)
     {
         rr(lsta, lstb);
@@ -195,8 +182,7 @@ void    push_index(t_list **lsta, t_list **lstb)
         rrr(lsta, lstb);
         stepa++;
         stepb++;
-    }///////
-
+    }
     while (stepa > 0)
     {
         ra(lsta, lstb);
@@ -220,6 +206,32 @@ void    push_index(t_list **lsta, t_list **lstb)
     pb(lsta, lstb);
 }
 
+int     find_max(t_list *lst)
+{
+    int i;
+    int max_value;
+    int max_index;
+    int size = ft_lstsize(lst);
+
+    i = 0;
+    if (size == 0)
+    {
+        ft_putstr_fd("Error\nvoid lst\n", 2);
+        exit(EXIT_FAILURE);
+    }
+    max_value = lst_index_value(lst, i);
+    max_index = 0;
+    while (i < size)
+    {
+        if (lst_index_value(lst, i) > max_value)
+        {
+            max_value = lst_index_value(lst, i);
+            max_index = i;
+        }
+        i++;
+    }
+    return (max_index);
+}
 
 void	lst_sort(t_list **lsta, t_list **lstb)
 {
@@ -241,18 +253,27 @@ void	lst_sort(t_list **lsta, t_list **lstb)
             pb(lsta, lstb);
             pb(lsta, lstb);
         }
-
+        ///////////////////////
         int count = 0;
         while (count < size - 2)
         {
             push_index(lsta, lstb);
             count++;
         }
-
+        ///////////////////////
         int j = 0;
+        
         while (j < size)
         {
             pa(lsta, lstb);
+            j++;
+        }
+        ft_putstr_fd("CHECK\n", 2);
+        j = 0;
+        int max_index = find_max(*lsta);
+        while (j < max_index + 1)
+        {
+            ra(lsta, lstb);
             j++;
         }
         print_stack(*lsta, *lstb);
