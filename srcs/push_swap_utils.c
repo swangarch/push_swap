@@ -31,6 +31,7 @@ int	lst_sorted(t_list *lst)
 void	free_tab(char **tab)
 {
 	int	i;
+	i = 0;
 
 	if (tab == NULL)
 		return ;

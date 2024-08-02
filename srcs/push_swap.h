@@ -27,5 +27,6 @@ void	lst_sort(t_list **lsta, t_list **lstb);
 void	free_tab(char **tab);
 void	print_stack(t_list *lsta, t_list *lstb);
 int     lst_value(t_list **lst);
+int     lst_index_value(t_list *lst, int index);
 
 # endif
