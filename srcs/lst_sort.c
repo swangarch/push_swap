@@ -117,10 +117,39 @@ int     total_cost(t_list **lsta, t_list **lstb, int indexa)
     int stepa;
     int stepb;
 
+    stepa = step_move_top(*lsta, indexa);
+    stepb = step_move_top(*lstb, target_index(lsta, lstb, indexa));
+
+    if (stepa * stepb > 0)
+    {
+        if (stepa > 0)
+        {
+            if (stepa > stepb)
+                return (ft_abs(stepa));
+            else
+                return (ft_abs(stepb));
+        }
+        else
+        {
+            if (stepa > stepb)
+                return (ft_abs(stepb));
+            else
+                return (ft_abs(stepa));
+        }
+    }
+
+    return (ft_abs(stepa) + ft_abs(stepb));
+}
+/*
+int     total_cost(t_list **lsta, t_list **lstb, int indexa)
+{
+    int stepa;
+    int stepb;
+
     stepa = ft_abs(step_move_top(*lsta, indexa));
     stepb = ft_abs(step_move_top(*lstb, target_index(lsta, lstb, indexa)));
     return (stepa + stepb);
-}
+}*/
 
 int     min_cost_index(t_list **lsta, t_list **lstb)
 {
@@ -154,6 +183,20 @@ void    push_index(t_list **lsta, t_list **lstb)
     stepa = step_move_top(*lsta, indexa_topush);
     stepb = step_move_top(*lstb, target_index(lsta, lstb, indexa_topush));
 
+    /////
+    while (stepa > 0 && stepb > 0)
+    {
+        rr(lsta, lstb);
+        stepa--;
+        stepb--;
+    }
+    while (stepa < 0 && stepb < 0)
+    {
+        rrr(lsta, lstb);
+        stepa++;
+        stepb++;
+    }///////
+
     while (stepa > 0)
     {
         ra(lsta, lstb);
@@ -176,7 +219,6 @@ void    push_index(t_list **lsta, t_list **lstb)
     }
     pb(lsta, lstb);
 }
-
 
 
 void	lst_sort(t_list **lsta, t_list **lstb)
