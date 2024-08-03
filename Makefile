@@ -20,8 +20,11 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIBFT = libft/libft.a
 
+INCLUDE = -I./libft -I./header
+
 SRCS = srcs/main.c srcs/lst_sort.c srcs/instruction_p.c srcs/instruction_r.c srcs/instruction_rv.c \
-    	srcs/instruction_s.c srcs/push_swap_utils.c srcs/check_input.c srcs/lst_sort_small.c
+    	srcs/instruction_s.c srcs/push_swap_utils.c srcs/check_input.c srcs/lst_sort_small.c \
+		srcs/push_low_cost.c 
 
 BONUS_SRCS = srcs_bonus/instruction_p_bonus.c srcs_bonus/instruction_r_bonus.c \
 		srcs_bonus/instruction_rv_bonus.c srcs_bonus/instruction_s_bonus.c \
@@ -31,11 +34,11 @@ all: $(NAME)
 
 $(NAME): $(SRCS)
 	make -C libft/
-	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(SRCS) $(INCLUDE) $(LIBFT) -o $(NAME)
 
 bonus: $(SRCS_BONUS)
 	make -C libft/
-	$(CC) $(CFLAGS) $(SRCS_BONUS) $(LIBFT) -o $(NAME_BONUS)
+	$(CC) $(CFLAGS) $(SRCS_BONUS) $(INCLUDE) $(LIBFT) -o $(NAME_BONUS)
 
 clean:
 	make clean -C libft/
