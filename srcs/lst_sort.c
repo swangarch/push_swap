@@ -47,7 +47,7 @@ int     lst_index_value(t_list *lst, int index)
     return (lst_value(&curr));
 }
 
-int     target_index(t_list **lsta, t_list **lstb, int indexa)
+int     target_index(t_list *lsta, t_list *lstb, int indexa)
 {
     int i;
     int target_index = 0;
@@ -57,24 +57,40 @@ int     target_index(t_list **lsta, t_list **lstb, int indexa)
     int max_index;
     int find_target = 0;
 
+    int a_value;
+    int b_size;
+    int curr_b_value;
+
+    a_value = lst_index_value(lsta, indexa);
+    b_size = ft_lstsize(lstb);
     smallest_diff = (long)INT_MAX * 2 + 1;
     i = 0;
-
-    if (ft_lstsize(*lstb) == 0)
+    
+    if (b_size == 0)
     {
         ft_putstr_fd("Error\nvoid lstb\n", 2);
         exit(EXIT_FAILURE);
     }
-    max_value = lst_index_value(*lstb, i);
+    max_value = lst_index_value(lstb, 0);
     max_index = 0;
-    while (i < ft_lstsize(*lstb))
+
+    t_list *curr_nodeb;
+    curr_nodeb = lstb;
+
+    while (i < b_size)
     {
-        if (lst_index_value(*lstb, i) > max_value)
+        
+        if (i != 0 && curr_nodeb->next)
         {
-            max_value = lst_index_value(*lstb, i);
+            curr_nodeb = curr_nodeb->next;
+        }
+        curr_b_value = lst_value(&curr_nodeb);
+        if (curr_b_value > max_value)
+        {
+            max_value = curr_b_value;
             max_index = i;
         }
-        curr_diff = lst_index_value(*lsta, indexa) - lst_index_value(*lstb, i);
+        curr_diff = a_value - curr_b_value;
         if (curr_diff < 0)
         {
             i++;
@@ -94,6 +110,7 @@ int     target_index(t_list **lsta, t_list **lstb, int indexa)
         return ((int)target_index);
 }
 
+
 int    step_move_top(t_list *lst, int index)
 {
     int size = ft_lstsize(lst);
@@ -112,40 +129,44 @@ int     ft_abs(int num)
         return (num);
 }
 
-int     total_cost(t_list **lsta, t_list **lstb, int indexa)
+int     total_cost(t_list *lsta, t_list *lstb, int indexa)
 {
     int stepa;
     int stepb;
+    int stepa_abs;
+    int stepb_abs;
 
-    stepa = step_move_top(*lsta, indexa);
-    stepb = step_move_top(*lstb, target_index(lsta, lstb, indexa));
+    stepa = step_move_top(lsta, indexa);
+    stepb = step_move_top(lstb, target_index(lsta, lstb, indexa));
+    stepa_abs = ft_abs(stepa);
+    stepb_abs = ft_abs(stepb);
     if (stepa * stepb > 0)
     {
         if (stepa > 0)
         {
             if (stepa > stepb)
-                return (ft_abs(stepa));
+                return (stepa_abs);
             else
-                return (ft_abs(stepb));
+                return (stepb_abs);
         }
         else
         {
             if (stepa > stepb)
-                return (ft_abs(stepb));
+                return (stepb_abs);
             else
-                return (ft_abs(stepa));
+                return (stepa_abs);
         }
     }
     return (ft_abs(stepa) + ft_abs(stepb));
 }
 
-int     min_cost_index(t_list **lsta, t_list **lstb)
+int     min_cost_index(t_list *lsta, t_list *lstb)
 {
     int i;
-    long curr_min = (long)INT_MAX;
+    int curr_min = INT_MAX;
     int cost;
     int min_index = 0;
-    int size = ft_lstsize(*lsta);
+    int size = ft_lstsize(lsta);
 
     i = 0;
     while (i < size)
@@ -161,15 +182,15 @@ int     min_cost_index(t_list **lsta, t_list **lstb)
     return (min_index);
 }
 
-void    push_index(t_list **lsta, t_list **lstb)
+void    push_low_cost(t_list **lsta, t_list **lstb)
 {
     int stepa;
     int stepb;
     int indexa_topush = 0;
 
-    indexa_topush = min_cost_index(lsta, lstb);
+    indexa_topush = min_cost_index(*lsta, *lstb);
     stepa = step_move_top(*lsta, indexa_topush);
-    stepb = step_move_top(*lstb, target_index(lsta, lstb, indexa_topush));
+    stepb = step_move_top(*lstb, target_index(*lsta, *lstb, indexa_topush));
 
     while (stepa > 0 && stepb > 0)
     {
@@ -203,15 +224,17 @@ void    push_index(t_list **lsta, t_list **lstb)
         rrb(lsta, lstb);
         stepb++;
     }
-    pa(lsta, lstb);
+    pb(lsta, lstb);
 }
 
 int     find_max(t_list *lst)
 {
     int i;
     int max_value;
+    int curr_value;
     int max_index;
     int size = ft_lstsize(lst);
+    t_list *curr_node;
 
     i = 0;
     if (size == 0)
@@ -219,13 +242,21 @@ int     find_max(t_list *lst)
         ft_putstr_fd("Error\nvoid lst\n", 2);
         exit(EXIT_FAILURE);
     }
-    max_value = lst_index_value(lst, i);
+    
+    curr_node = lst;
+    max_value = lst_value(&curr_node);
     max_index = 0;
     while (i < size)
     {
-        if (lst_index_value(lst, i) > max_value)
+        
+        if (curr_node->next)
         {
-            max_value = lst_index_value(lst, i);
+            curr_node = curr_node->next;
+            curr_value = lst_value(&curr_node);
+        }
+        if (curr_value > max_value)
+        {
+            max_value = curr_value;
             max_index = i;
         }
         i++;
@@ -233,102 +264,60 @@ int     find_max(t_list *lst)
     return (max_index);
 }
 
-int     in_range(int start, int end, t_list **lst)
-{
-    if (lst_value(lst) >= start && lst_value(lst) < end)
-        return (1);
-    return (0);
-}
-
 void	lst_sort(t_list **lsta, t_list **lstb)
 {
-	int	size_total = ft_lstsize(*lsta);
-	int	i = 0;
-	
-	if (size_total <= 3)
-    {
-        write(2, "Error\n", 6);
-		return ;
-    }
+	int	size = ft_lstsize(*lsta);
+
+	if (size <= 3)
+		lst_sort_small(lsta, lstb);
 	else
 	{
-        int size;
-
-        int spliter_1 = 25;
-        int spliter_2 = 50;
-        int spliter_3 = 75;
-        /*
-        int spliter_1 = 125;
-        int spliter_2 = 250;
-        int spliter_3 = 375;*/
-
-        size = ft_lstsize(*lsta);
-        while (size > 0)
+        if (lst_value(lsta) > lst_value(&((*lsta)->next)))
         {
-            if (in_range(spliter_1, spliter_2, lsta))
-            {
-                pb(lsta, lstb);
-                
-                if (!in_range(spliter_1, spliter_2, lsta) && !in_range(spliter_2, spliter_3, lsta))
-                    rr(lsta, lstb);
-                else
-                    rb(lsta, lstb);
-            }
-            else if (in_range(spliter_2, spliter_3, lsta))
-            {
-                pb(lsta, lstb);
-            }
-            else
-                ra(lsta, lstb);
-            size--;
-        }
-        size = ft_lstsize(*lsta);
-        while (size > 0)
-        {
-            if (in_range(0, spliter_1, lsta))
-            {
-                pb(lsta, lstb);
-                
-                if (!in_range(0, spliter_1, lsta) && !(in_range(spliter_3, 100, lsta)))
-                    rr(lsta, lstb);
-                else
-                    rb(lsta, lstb);
-            }
-            else if (in_range(spliter_3, 100, lsta))
-            {
-                pb(lsta, lstb);
-            }
-            else
-                ra(lsta, lstb);
-            size--;
-        }
-        
-        /*initialize——————————————————————————————————————————————————————*/
-        if (lst_value(lstb) < lst_value(&((*lstb)->next)))
-        {
-            sb(lsta, lstb);
-            pa(lsta, lstb);
-            pa(lsta, lstb);
+            sa(lsta, lstb);
+            pb(lsta, lstb);
+            pb(lsta, lstb);
         }
         else
         {
-            pa(lsta, lstb);
-            pa(lsta, lstb);
+            pb(lsta, lstb);
+            pb(lsta, lstb);
         }
-        /*initialize——————————————————————————————————————————————————————*/
-
-        /*push b to a——————————————————————————————————————————————————————*/
-        i = 0;
-        while (i < size_total - 2)
+        ///////////////////////push a to b
+        int count = 0;
+        while (count < size - 2)
         {
-            push_index(lsta, lstb);
-            i++;
+            push_low_cost(lsta, lstb);
+            count++;
         }
-        /*push a to b——————————————————————————————————————————————————————*/
-
-        /*push b to a——————————————————————————————————————————————————————*/
-        print_stack(*lsta, *lstb);
-    }    
-    ft_printf("________stack sorted: %s\n", ((lst_sorted(*lsta) && size_total == ft_lstsize(*lsta)) ? "Yes" : "No"));
-	//ft_printf("________stack a size is %d\n", ft_lstsize(*lsta));
+        ///////////////////////push back b to a
+        int j = 0;
+        int max_index = find_max(*lstb);
+        while (j < size)
+        {
+            pa(lsta, lstb);
+            j++;
+        }
+        j = 0;
+        if (max_index < size / 2)
+        {
+            while (j < max_index)
+            {
+                rra(lsta, lstb);
+                j++;
+            }
+        }
+        else
+        {
+            while (j < size - max_index)
+            {
+                ra(lsta, lstb);
+                j++;
+            }
+        }
+        rra(lsta, lstb);
+        //ft_printf("max index is %d\n", max_index);
+    }
+    //print_stack(*lsta, *lstb);
+    //ft_printf("________stack sorted: %s\n", ((lst_sorted(*lsta) && size == ft_lstsize(*lsta)) ? "Yes" : "No"));
 }

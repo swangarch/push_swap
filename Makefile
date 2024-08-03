@@ -21,7 +21,7 @@ CFLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 
 SRCS = srcs/main.c srcs/lst_sort.c srcs/instruction_p.c srcs/instruction_r.c srcs/instruction_rv.c \
-    	srcs/instruction_s.c srcs/push_swap_utils.c srcs/check_input.c
+    	srcs/instruction_s.c srcs/push_swap_utils.c srcs/check_input.c srcs/lst_sort_small.c
 
 BONUS_SRCS = srcs_bonus/instruction_p_bonus.c srcs_bonus/instruction_r_bonus.c \
 		srcs_bonus/instruction_rv_bonus.c srcs_bonus/instruction_s_bonus.c \

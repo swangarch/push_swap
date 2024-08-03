@@ -140,16 +140,6 @@ int     total_cost(t_list **lsta, t_list **lstb, int indexa)
 
     return (ft_abs(stepa) + ft_abs(stepb));
 }
-/*
-int     total_cost(t_list **lsta, t_list **lstb, int indexa)
-{
-    int stepa;
-    int stepb;
-
-    stepa = ft_abs(step_move_top(*lsta, indexa));
-    stepb = ft_abs(step_move_top(*lstb, target_index(lsta, lstb, indexa)));
-    return (stepa + stepb);
-}*/
 
 int     min_cost_index(t_list **lsta, t_list **lstb)
 {
