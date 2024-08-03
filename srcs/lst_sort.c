@@ -28,7 +28,6 @@ int     target_index(t_list *lsta, t_list *lstb, int indexa)
     a_value = lst_index_value(lsta, indexa);
     b_size = ft_lstsize(lstb);
     smallest_diff = (long)INT_MAX * 2 + 1;
-    i = 0;
     
     if (b_size == 0)
     {
@@ -38,16 +37,14 @@ int     target_index(t_list *lsta, t_list *lstb, int indexa)
     max_value = lst_index_value(lstb, 0);
     max_index = 0;
 
+    i = 0;
     t_list *curr_nodeb;
     curr_nodeb = lstb;
 
     while (i < b_size)
     {
-        
         if (i != 0 && curr_nodeb->next)
-        {
             curr_nodeb = curr_nodeb->next;
-        }
         curr_b_value = lst_value(&curr_nodeb);
         if (curr_b_value > max_value)
         {
@@ -71,7 +68,7 @@ int     target_index(t_list *lsta, t_list *lstb, int indexa)
     if (find_target == 0)
         return (max_index);
     else
-        return ((int)target_index);
+        return (target_index);
 }
 
 int    step_move_top(t_list *lst, int index)

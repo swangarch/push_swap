@@ -41,15 +41,6 @@ int	*save_inputs(int *inputs, int argc, char **argv, int i)
 	return (inputs);
 }
 
-void	push_swap(t_list *lsta, t_list *lstb)
-{
-	//ft_printf("________START_sort_stack________________________________________\n");
-	if (lst_sorted(lsta))
-		return ;
-	lst_sort(&lsta, &lstb);
-	//ft_printf("________STOP_sort_stack_________________________________________\n");
-}
-
 void	input_save_multiargv(int argc, char **argv, int **inputs, int *num_elements)
 {
 	int	i;
@@ -134,9 +125,16 @@ void	copy_tab_tolst(t_list **lst, int *inputs, int num_elements)////maybe use in
 	i = 0;
 	while (i < num_elements)
 	{
-		ft_lstadd_back(lst, ft_lstnew((void *) (&inputs[i])));  //此处如果lstnew fail 有可能leak protect
+		ft_lstadd_back(lst, ft_lstnew((void *) (&inputs[i])));  //此处如果lstnew fail 有可能leak protect!!!!!!!!!!!!!
 		i++;
 	}
+}
+
+void	push_swap(t_list *lsta, t_list *lstb)
+{
+	if (lst_sorted(lsta))
+		return ;
+	lst_sort(&lsta, &lstb);
 }
 
 int	main(int argc, char **argv)///检查输入是“包裹起来的情况”
@@ -156,7 +154,7 @@ int	main(int argc, char **argv)///检查输入是“包裹起来的情况”
 	else
 		input_save_multiargv(argc, argv, &inputs, &num_elements);
 	copy_tab_tolst(&lsta, inputs, num_elements);
-	push_swap(lsta, lstb);///the case where input is bigger than 3
+	push_swap(lsta, lstb);
 	ft_lstclear_nfunc(&lsta);
 	free(inputs);
 	return (0);
