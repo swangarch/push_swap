@@ -10,6 +10,9 @@
         "ranges": "c",
         "span": "c",
         "variant": "c",
-        "chrono": "c"
+        "chrono": "c",
+        "bitset": "c",
+        "regex": "c",
+        "utility": "c"
     }
 }

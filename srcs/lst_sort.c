@@ -12,41 +12,6 @@
 
 #include "push_swap.h"
 
-int     lst_value(t_list **lst)
-{   
-    if (lst)
-        return (*((int *)((*lst)->content)));
-    else
-    {
-        ft_putstr_fd("Error\nTry to get value of a int from NULL struct", 2);
-        exit(EXIT_FAILURE);
-    }
-}
-
-int     lst_index_value(t_list *lst, int index)
-{
-    int i = 0;
-    t_list  *curr;
-
-    curr = lst;
-    if (!lst)
-    {
-        ft_putstr_fd("Error\nlst not exist\n", 2);
-        exit(EXIT_FAILURE);
-    }
-    if (index > ft_lstsize(lst))
-    {
-        ft_putstr_fd("Error\nindex out of range\n", 2);
-        exit(EXIT_FAILURE);
-    }
-    while (i < index)
-    {
-        curr = curr->next;
-        i++;
-    }
-    return (lst_value(&curr));
-}
-
 int     target_index(t_list *lsta, t_list *lstb, int indexa)
 {
     int i;
@@ -178,39 +143,43 @@ int     min_cost_index(t_list *lsta, t_list *lstb)
     return (min_index);
 }
 
-void    push_move(t_list **lsta, t_list **lstb, int stepa, int stepb)
+void    push_move_tog(t_list **lsta, t_list **lstb, int *stepa, int *stepb)
 {
-    while (stepa > 0 && stepb > 0)
+    while ((*stepa) > 0 && (*stepb) > 0)
     {
         rr(lsta, lstb);
-        stepa--;
-        stepb--;
+        (*stepa)--;
+        (*stepb)--;
     }
-    while (stepa < 0 && stepb < 0)
+    while ((*stepa) < 0 && (*stepb) < 0)
     {
         rrr(lsta, lstb);
-        stepa++;
-        stepb++;
+        (*stepa)++;
+        (*stepb)++;
     }
-    while (stepa > 0)
+}
+
+void    push_move_sep(t_list **lsta, t_list **lstb, int *stepa, int *stepb)
+{
+    while ((*stepa) > 0)
     {
         ra(lsta, lstb);
-        stepa--;
+        (*stepa)--;
     }
-    while (stepa < 0)
+    while ((*stepa) < 0)
     {
         rra(lsta, lstb);
-        stepa++;
+        (*stepa)++;
     }
-    while (stepb > 0)
+    while ((*stepb) > 0)
     {
         rb(lsta, lstb);
-        stepb--;
+        (*stepb)--;
     }
-    while (stepb < 0)
+    while ((*stepb) < 0)
     {
         rrb(lsta, lstb);
-        stepb++;
+        (*stepb)++;
     }
 }
 
@@ -223,7 +192,8 @@ void    push_low_cost(t_list **lsta, t_list **lstb)
     indexa_topush = min_cost_index(*lsta, *lstb);
     stepa = step_move_top(*lsta, indexa_topush);
     stepb = step_move_top(*lstb, target_index(*lsta, *lstb, indexa_topush));
-    push_move(lsta, lstb, stepa, stepb);
+    push_move_tog(lsta, lstb, &stepa, &stepb);
+    push_move_sep(lsta, lstb, &stepa, &stepb);
     pb(lsta, lstb);
 }
 
