@@ -56,7 +56,6 @@ int     target_index(t_list *lsta, t_list *lstb, int indexa)
     int max_value;
     int max_index;
     int find_target = 0;
-
     int a_value;
     int b_size;
     int curr_b_value;
@@ -110,7 +109,6 @@ int     target_index(t_list *lsta, t_list *lstb, int indexa)
         return ((int)target_index);
 }
 
-
 int    step_move_top(t_list *lst, int index)
 {
     int size = ft_lstsize(lst);
@@ -133,28 +131,24 @@ int     total_cost(t_list *lsta, t_list *lstb, int indexa)
 {
     int stepa;
     int stepb;
-    int stepa_abs;
-    int stepb_abs;
 
     stepa = step_move_top(lsta, indexa);
     stepb = step_move_top(lstb, target_index(lsta, lstb, indexa));
-    stepa_abs = ft_abs(stepa);
-    stepb_abs = ft_abs(stepb);
     if (stepa * stepb > 0)
     {
         if (stepa > 0)
         {
             if (stepa > stepb)
-                return (stepa_abs);
+                return (ft_abs(stepa));
             else
-                return (stepb_abs);
+                return (ft_abs(stepb));
         }
         else
         {
             if (stepa > stepb)
-                return (stepb_abs);
+                return (ft_abs(stepb));
             else
-                return (stepa_abs);
+                return (ft_abs(stepa));
         }
     }
     return (ft_abs(stepa) + ft_abs(stepb));
@@ -163,12 +157,14 @@ int     total_cost(t_list *lsta, t_list *lstb, int indexa)
 int     min_cost_index(t_list *lsta, t_list *lstb)
 {
     int i;
-    int curr_min = INT_MAX;
+    int curr_min;
     int cost;
     int min_index = 0;
-    int size = ft_lstsize(lsta);
+    int size;
 
     i = 0;
+    size = ft_lstsize(lsta);
+    curr_min = INT_MAX;
     while (i < size)
     {
         cost = total_cost(lsta, lstb, i);
@@ -182,16 +178,8 @@ int     min_cost_index(t_list *lsta, t_list *lstb)
     return (min_index);
 }
 
-void    push_low_cost(t_list **lsta, t_list **lstb)
+void    push_move(t_list **lsta, t_list **lstb, int stepa, int stepb)
 {
-    int stepa;
-    int stepb;
-    int indexa_topush = 0;
-
-    indexa_topush = min_cost_index(*lsta, *lstb);
-    stepa = step_move_top(*lsta, indexa_topush);
-    stepb = step_move_top(*lstb, target_index(*lsta, *lstb, indexa_topush));
-
     while (stepa > 0 && stepb > 0)
     {
         rr(lsta, lstb);
@@ -224,6 +212,18 @@ void    push_low_cost(t_list **lsta, t_list **lstb)
         rrb(lsta, lstb);
         stepb++;
     }
+}
+
+void    push_low_cost(t_list **lsta, t_list **lstb)
+{
+    int stepa;
+    int stepb;
+    int indexa_topush;
+
+    indexa_topush = min_cost_index(*lsta, *lstb);
+    stepa = step_move_top(*lsta, indexa_topush);
+    stepb = step_move_top(*lstb, target_index(*lsta, *lstb, indexa_topush));
+    push_move(lsta, lstb, stepa, stepb);
     pb(lsta, lstb);
 }
 
@@ -242,13 +242,11 @@ int     find_max(t_list *lst)
         ft_putstr_fd("Error\nvoid lst\n", 2);
         exit(EXIT_FAILURE);
     }
-    
     curr_node = lst;
     max_value = lst_value(&curr_node);
     max_index = 0;
     while (i < size)
     {
-        
         if (curr_node->next)
         {
             curr_node = curr_node->next;
