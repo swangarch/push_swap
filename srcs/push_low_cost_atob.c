@@ -15,30 +15,25 @@
 int     target_index_atob(t_list *lsta, t_list *lstb, int indexa)
 {
     int i;
-    int target_index = 0;
+    int target_index;
     long smallest_diff;
-    long curr_diff;
     int find_target = 0;
     int a_value;
     int b_size;
-    int curr_b_value;
-    t_list *curr_nodeb;
+    t_list *curr_b;
 
     a_value = lst_index_value(lsta, indexa);
     b_size = ft_lstsize(lstb);
     smallest_diff = (long)INT_MAX * 2 + 1;
-
     i = 0;
-    curr_nodeb = lstb;
+    curr_b = lstb;
     while (i < b_size)
     {
-        if (i != 0 && curr_nodeb->next)
-            curr_nodeb = curr_nodeb->next;
-        curr_b_value = lst_value(&curr_nodeb);
-        curr_diff = a_value - curr_b_value;
-        if (curr_diff < smallest_diff && curr_diff >= 0)
+        if (i != 0 && curr_b->next)
+            curr_b = curr_b->next;
+        if (a_value - lst_value(&curr_b) < smallest_diff && a_value >= lst_value(&curr_b))
         {
-            smallest_diff = curr_diff;
+            smallest_diff = a_value - lst_value(&curr_b);
             target_index = i;
             find_target = 1;
         }
