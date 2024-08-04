@@ -12,12 +12,11 @@
 
 #include "push_swap.h"
 
-int     target_index_btoa(t_list *lsta, t_list *lstb, int indexb)
+int     target_index_btoa(t_list *lsta, t_list *lstb, int indexb, int i)
 {
-    int i;
-    int target_index = 0;
+    int target_index;
     long smallest_diff;
-    int find_target = 0;
+    int find_target;
     int b_value;
     int a_size;
     t_list *curr_a;
@@ -25,7 +24,6 @@ int     target_index_btoa(t_list *lsta, t_list *lstb, int indexb)
     b_value = lst_index_value(lstb, indexb);
     a_size = ft_lstsize(lsta);
     smallest_diff = (long)INT_MAX * 2 + 1;///?????/
-    i = 0;
     curr_a = lsta;
     while (i < a_size)
     {
@@ -50,7 +48,7 @@ int     total_cost_btoa(t_list *lsta, t_list *lstb, int indexb)
     int stepa;
     int stepb;
 
-    stepa = step_move_top(lsta, target_index_btoa(lsta, lstb, indexb));
+    stepa = step_move_top(lsta, target_index_btoa(lsta, lstb, indexb, 0));
     stepb = step_move_top(lstb, indexb);
     if (stepa * stepb > 0)
     {
@@ -103,7 +101,7 @@ void    push_low_cost_btoa(t_list **lsta, t_list **lstb)
     int indexb_topush;
 
     indexb_topush = min_cost_index_btoa(*lsta, *lstb);
-    stepa = step_move_top(*lsta, target_index_btoa(*lsta, *lstb, indexb_topush));
+    stepa = step_move_top(*lsta, target_index_btoa(*lsta, *lstb, indexb_topush, 0));
     stepb = step_move_top(*lstb, indexb_topush);
     push_move_tog(lsta, lstb, &stepa, &stepb);
     push_move_sep(lsta, lstb, &stepa, &stepb);
