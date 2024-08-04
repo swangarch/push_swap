@@ -34,7 +34,13 @@ void    push_low_cost_btoa(t_list **lsta, t_list **lstb);
 
 int     target_index_atob(t_list *lsta, t_list *lstb, int indexa);
 
-int    step_move_top(t_list *lst, int index);
+int     step_move_top(t_list *lst, int index);
+void    push_move_tog(t_list **lsta, t_list **lstb, int *stepa, int *stepb);
+void    push_move_sep(t_list **lsta, t_list **lstb, int *stepa, int *stepb);
+
+int     ft_abs(int num);
+
+int     lst_max_index(t_list *lst);
 int     lst_min_index(t_list *lst);
 int     ft_abs(int num);
 

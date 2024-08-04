@@ -51,37 +51,10 @@ void	print_stack(t_list *lsta, t_list *lstb)
 	lst_print(lstb);
 }
 
-int     lst_value(t_list **lst)
-{   
-    if (lst)
-        return (*((int *)((*lst)->content)));
-    else
-    {
-        ft_putstr_fd("Error\nTry to get value of a int from NULL struct", 2);
-        exit(EXIT_FAILURE);
-    }
-}
-
-int     lst_index_value(t_list *lst, int index)
+int     ft_abs(int num)
 {
-    int i = 0;
-    t_list  *curr;
-
-    curr = lst;
-    if (!lst)
-    {
-        ft_putstr_fd("Error\nlst not exist\n", 2);
-        exit(EXIT_FAILURE);
-    }
-    if (index > ft_lstsize(lst))
-    {
-        ft_putstr_fd("Error\nindex out of range\n", 2);
-        exit(EXIT_FAILURE);
-    }
-    while (i < index)
-    {
-        curr = curr->next;
-        i++;
-    }
-    return (lst_value(&curr));
+    if (num < 0)
+        return (-num);
+    else
+        return (num);
 }

@@ -12,24 +12,6 @@
 
 #include "push_swap.h"
 
-int    step_move_top(t_list *lst, int index)
-{
-    int size = ft_lstsize(lst);
-
-    if (index > (size - index))
-        return (index - size);
-    else
-        return (index);
-}
-
-int     ft_abs(int num)
-{
-    if (num < 0)
-        return (-num);
-    else
-        return (num);
-}
-
 void    push_start_atob(t_list **lsta, t_list **lstb)
 {
     if (ft_lstsize(*lsta) == 4)
@@ -76,15 +58,15 @@ void    rotate_back(t_list **lsta, t_list **lstb)
 
 void	lst_sort(t_list **lsta, t_list **lstb)
 {
-	int	size = ft_lstsize(*lsta);
+	int	size;
     int i;
 
+    size = ft_lstsize(*lsta);
 	if (size <= 3)
 		lst_sort_small(lsta, lstb);
 	else
 	{
         push_start_atob(lsta, lstb);
-
         i = 0;
         while (i < size - 2)
         {
@@ -100,7 +82,6 @@ void	lst_sort(t_list **lsta, t_list **lstb)
             push_low_cost_btoa(lsta, lstb);
             i++;
         }
-        
         rotate_back(lsta, lstb);
     }
     //print_stack(*lsta, *lstb);

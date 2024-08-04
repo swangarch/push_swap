@@ -12,30 +12,6 @@
 
 #include "push_swap.h"
 
-int     lst_max_index(t_list *lst)
-{
-    int i;
-    int max;
-    int max_index;
-    t_list *curr;
-
-    max = INT_MIN;
-    max_index = 0;
-    curr = lst;
-    i = 0;
-    while (curr)
-    {
-        if (lst_value(&curr) > max)
-        {
-            max = lst_value(&curr);
-            max_index = i;
-        }
-        curr = curr->next;
-        i++;
-    }
-    return (max_index);
-}
-
 int     target_index_atob(t_list *lsta, t_list *lstb, int indexa)
 {
     int i;
@@ -51,11 +27,7 @@ int     target_index_atob(t_list *lsta, t_list *lstb, int indexa)
     a_value = lst_index_value(lsta, indexa);
     b_size = ft_lstsize(lstb);
     smallest_diff = (long)INT_MAX * 2 + 1;
-    if (b_size == 0)  /////can be removed
-    {
-        ft_putstr_fd("Error\nvoid lstb\n", 2);
-        exit(EXIT_FAILURE);
-    }
+
     i = 0;
     curr_nodeb = lstb;
     while (i < b_size)
@@ -78,7 +50,7 @@ int     target_index_atob(t_list *lsta, t_list *lstb, int indexa)
         return (target_index);
 }
 
-int     total_cost(t_list *lsta, t_list *lstb, int indexa)
+int     total_cost_atob(t_list *lsta, t_list *lstb, int indexa)
 {
     int stepa;
     int stepb;
@@ -105,7 +77,7 @@ int     total_cost(t_list *lsta, t_list *lstb, int indexa)
     return (ft_abs(stepa) + ft_abs(stepb));
 }
 
-int     min_cost_index(t_list *lsta, t_list *lstb)
+int     min_cost_index_atob(t_list *lsta, t_list *lstb)
 {
     int i;
     int curr_min;
@@ -118,7 +90,7 @@ int     min_cost_index(t_list *lsta, t_list *lstb)
     curr_min = INT_MAX;
     while (i < size)
     {
-        cost = total_cost(lsta, lstb, i);
+        cost = total_cost_atob(lsta, lstb, i);
         if (cost < curr_min)
         {
             min_index = i;
@@ -129,53 +101,13 @@ int     min_cost_index(t_list *lsta, t_list *lstb)
     return (min_index);
 }
 
-void    push_move_tog(t_list **lsta, t_list **lstb, int *stepa, int *stepb)
-{
-    while ((*stepa) > 0 && (*stepb) > 0)
-    {
-        rr(lsta, lstb);
-        (*stepa)--;
-        (*stepb)--;
-    }
-    while ((*stepa) < 0 && (*stepb) < 0)
-    {
-        rrr(lsta, lstb);
-        (*stepa)++;
-        (*stepb)++;
-    }
-}
-
-void    push_move_sep(t_list **lsta, t_list **lstb, int *stepa, int *stepb)
-{
-    while ((*stepa) > 0)
-    {
-        ra(lsta, lstb);
-        (*stepa)--;
-    }
-    while ((*stepa) < 0)
-    {
-        rra(lsta, lstb);
-        (*stepa)++;
-    }
-    while ((*stepb) > 0)
-    {
-        rb(lsta, lstb);
-        (*stepb)--;
-    }
-    while ((*stepb) < 0)
-    {
-        rrb(lsta, lstb);
-        (*stepb)++;
-    }
-}
-
 void    push_low_cost_atob(t_list **lsta, t_list **lstb)
 {
     int stepa;
     int stepb;
     int indexa_topush;
 
-    indexa_topush = min_cost_index(*lsta, *lstb);
+    indexa_topush = min_cost_index_atob(*lsta, *lstb);
     stepa = step_move_top(*lsta, indexa_topush);
     stepb = step_move_top(*lstb, target_index_atob(*lsta, *lstb, indexa_topush));
     push_move_tog(lsta, lstb, &stepa, &stepb);
