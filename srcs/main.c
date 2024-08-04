@@ -130,16 +130,67 @@ void	copy_tab_tolst(t_list **lst, int *inputs, int num_elements)////maybe use in
 	}
 }
 
-void	push_swap(t_list *lsta, t_list *lstb)
+void	push_swap(t_list *lsta, t_list *lstb, t_spliter *spl)
 {
 	if (lst_sorted(lsta))
 		return ;
-	lst_sort(&lsta, &lstb);
+	lst_sort(&lsta, &lstb, spl);
 }
+
+void	ft_swap(int *a, int *b)
+{
+	int temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+void	ft_b_sort(int *inputs, int num)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < num)
+	{
+		j = 0;
+		while (j < num)
+		{
+			if (inputs[i] < inputs[j] && i != j)
+				ft_swap(&inputs[i], &inputs[j]);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	ft_print_array(int *inputs, int num)
+{
+	int	i;
+
+	i = 0;
+	while (i < num)
+	{
+		ft_printf("%d\n", inputs[i]);
+		i++;
+	}
+}
+
+void	set_struct(t_spliter *spl, int *inputs, int num)
+{
+	spl->spliter_0 = inputs[0];
+	spl->spliter_1 = inputs[num / 4];
+	spl->spliter_2 = inputs[num / 4 * 2];
+	spl->spliter_3 = inputs[num / 4 * 3];
+	spl->spliter_4 = inputs[num -1];
+}	
 
 int	main(int argc, char **argv)///检查输入是“包裹起来的情况”
 {
 	int	*inputs;
+	int	*inputs_copy;
 	t_list	*lsta;
 	t_list	*lstb;
 	int num_elements;
@@ -150,12 +201,27 @@ int	main(int argc, char **argv)///检查输入是“包裹起来的情况”
 	num_elements = 0;
 
 	if (argc == 2)
+	{
 		input_save_argvinquote(argv, &inputs, &num_elements);
+		input_save_argvinquote(argv, &inputs_copy, &num_elements);
+	}
 	else
+	{
 		input_save_multiargv(argc, argv, &inputs, &num_elements);
+		input_save_multiargv(argc, argv, &inputs_copy, &num_elements);
+	}
 	copy_tab_tolst(&lsta, inputs, num_elements);
-	push_swap(lsta, lstb);
+
+	ft_b_sort(inputs_copy, num_elements);
+	//ft_print_array(inputs_copy, num_elements);
+
+	t_spliter spl;
+
+	set_struct(&spl, inputs_copy, num_elements);
+
+	push_swap(lsta, lstb, &spl);
 	ft_lstclear_nfunc(&lsta);
 	free(inputs);
+	free(inputs_copy);
 	return (0);
 }

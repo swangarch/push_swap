@@ -4,6 +4,14 @@
 #include "../libft/libft.h"
 #include <limits.h>
 
+typedef struct s_spliter{
+    int spliter_0;
+    int spliter_1;
+    int spliter_2;
+    int spliter_3;
+    int spliter_4;
+} t_spliter;
+
 int     all_digits(char *s);
 int     check_double(int *num, int count);
 void	lst_print(t_list *lst);
@@ -23,7 +31,7 @@ void    rrb(t_list **lsta, t_list **lstb);
 void    rrr(t_list **lsta, t_list **lstb);
 
 int	    lst_sorted(t_list *lst);
-void	lst_sort(t_list **lsta, t_list **lstb);
+void	lst_sort(t_list **lsta, t_list **lstb, t_spliter *spl);
 void	free_tab(char **tab);
 void	print_stack(t_list *lsta, t_list *lstb);
 int     lst_value(t_list **lst);

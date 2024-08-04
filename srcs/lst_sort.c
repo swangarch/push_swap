@@ -63,38 +63,8 @@ int     in_range(int start, int end, t_list **lst)
     return (0);
 }
 
-typedef struct s_spliter{
-    int spliter_0;
-    int spliter_1;
-    int spliter_2;
-    int spliter_3;
-    int spliter_4;
-} t_spliter;
 
-void    lst_stream_1(t_list **lsta, t_list **lstb, int spliter_x, int spliter_y, int spliter_z,int rest)
-{
-    int num_left_ina;
-
-    num_left_ina = ft_lstsize(*lsta);
-    while (num_left_ina > rest)
-    {
-        if (in_range(spliter_x, spliter_y, lsta))
-        {
-            pb(lsta, lstb);
-            if (!in_range(spliter_x, spliter_y, lsta) && !in_range(spliter_y, spliter_z, lsta))
-                rr(lsta, lstb);
-            else
-                rb(lsta, lstb);
-        }
-        else if (in_range(spliter_y, spliter_z, lsta))
-            pb(lsta, lstb);
-        else
-            ra(lsta, lstb);
-        num_left_ina--;
-    }
-}
-
-void    lst_stream_2(t_list **lsta, t_list **lstb, int spliter_x1, int spliter_x2, int spliter_y1, int spliter_y2, int rest)
+void    lst_stream(t_list **lsta, t_list **lstb, int spliter_x1, int spliter_x2, int spliter_y1, int spliter_y2, int rest)
 {
     int num_left_ina;
 
@@ -117,30 +87,24 @@ void    lst_stream_2(t_list **lsta, t_list **lstb, int spliter_x1, int spliter_x
     }
 }
 
-void	lst_sort(t_list **lsta, t_list **lstb)
+void	lst_sort(t_list **lsta, t_list **lstb, t_spliter *spl)
 {
 	int	size;
     int i;
 
-    /*
-    int spliter_1 = 25;
-    int spliter_2 = 50;
-    int spliter_3 = 75;
-    int spliter_4 = 100;
-    */
-        int spliter_0 = 0;
-        int spliter_1 = 125;
-        int spliter_2 = 250;
-        int spliter_3 = 375;
-        int spliter_4 = 500;
+    int spliter_0 = spl->spliter_0;
+    int spliter_1 = spl->spliter_1;
+    int spliter_2 = spl->spliter_2;
+    int spliter_3 = spl->spliter_3;
+    int spliter_4 = spl->spliter_4;
 
     size = ft_lstsize(*lsta);
 	if (size <= 3)
-		lst_sort_small(lsta, lstb);
+		lst_sort_small(lsta, lstb);   /////如果过太小没必要推过去就不推
 	else
 	{
-        lst_stream_2(lsta, lstb, spliter_1, spliter_2, spliter_2, spliter_3, 2);
-        lst_stream_2(lsta, lstb, spliter_0, spliter_1, spliter_3, spliter_4, 2);
+        lst_stream(lsta, lstb, spliter_1, spliter_2, spliter_2, spliter_3, 2);
+        lst_stream(lsta, lstb, spliter_0, spliter_1, spliter_3, spliter_4, 2);
         lst_sort_small(lsta, lstb);
         i = 0;
         while (ft_lstsize(*lstb) > 0)
