@@ -12,13 +12,79 @@
 
 #include "push_swap.h"
 
+int     lst_max_index(t_list *lst)
+{
+    int i;
+    int max;
+    int max_index;
+    t_list *curr;
+
+    max = INT_MIN;
+    max_index = 0;
+    curr = lst;
+    i = 0;
+    while (curr)
+    {
+        if (lst_value(&curr) > max)
+        {
+            max = lst_value(&curr);
+            max_index = i;
+        }
+        curr = curr->next;
+        i++;
+    }
+    return (max_index);
+}
+
+int     target_index_atob(t_list *lsta, t_list *lstb, int indexa)
+{
+    int i;
+    int target_index = 0;
+    long smallest_diff;
+    long curr_diff;
+    int find_target = 0;
+    int a_value;
+    int b_size;
+    int curr_b_value;
+    t_list *curr_nodeb;
+
+    a_value = lst_index_value(lsta, indexa);
+    b_size = ft_lstsize(lstb);
+    smallest_diff = (long)INT_MAX * 2 + 1;
+    if (b_size == 0)  /////can be removed
+    {
+        ft_putstr_fd("Error\nvoid lstb\n", 2);
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    curr_nodeb = lstb;
+    while (i < b_size)
+    {
+        if (i != 0 && curr_nodeb->next)
+            curr_nodeb = curr_nodeb->next;
+        curr_b_value = lst_value(&curr_nodeb);
+        curr_diff = a_value - curr_b_value;
+        if (curr_diff < smallest_diff && curr_diff >= 0)
+        {
+            smallest_diff = curr_diff;
+            target_index = i;
+            find_target = 1;
+        }
+        i++;
+    }
+    if (find_target == 0)
+        return (lst_max_index(lstb));
+    else
+        return (target_index);
+}
+
 int     total_cost(t_list *lsta, t_list *lstb, int indexa)
 {
     int stepa;
     int stepb;
 
     stepa = step_move_top(lsta, indexa);
-    stepb = step_move_top(lstb, target_index(lsta, lstb, indexa));
+    stepb = step_move_top(lstb, target_index_atob(lsta, lstb, indexa));
     if (stepa * stepb > 0)
     {
         if (stepa > 0)
@@ -103,7 +169,7 @@ void    push_move_sep(t_list **lsta, t_list **lstb, int *stepa, int *stepb)
     }
 }
 
-void    push_low_cost(t_list **lsta, t_list **lstb)
+void    push_low_cost_atob(t_list **lsta, t_list **lstb)
 {
     int stepa;
     int stepb;
@@ -111,7 +177,7 @@ void    push_low_cost(t_list **lsta, t_list **lstb)
 
     indexa_topush = min_cost_index(*lsta, *lstb);
     stepa = step_move_top(*lsta, indexa_topush);
-    stepb = step_move_top(*lstb, target_index(*lsta, *lstb, indexa_topush));
+    stepb = step_move_top(*lstb, target_index_atob(*lsta, *lstb, indexa_topush));
     push_move_tog(lsta, lstb, &stepa, &stepb);
     push_move_sep(lsta, lstb, &stepa, &stepb);
     pb(lsta, lstb);

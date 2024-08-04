@@ -29,10 +29,13 @@ void	print_stack(t_list *lsta, t_list *lstb);
 int     lst_value(t_list **lst);
 int     lst_index_value(t_list *lst, int index);
 void	lst_sort_small(t_list **lsta, t_list **lstb);
-void    push_low_cost(t_list **lsta, t_list **lstb);
-int     target_index(t_list *lsta, t_list *lstb, int indexa);
+void    push_low_cost_atob(t_list **lsta, t_list **lstb);
+void    push_low_cost_btoa(t_list **lsta, t_list **lstb);
+
+int     target_index_atob(t_list *lsta, t_list *lstb, int indexa);
 
 int    step_move_top(t_list *lst, int index);
+int     lst_min_index(t_list *lst);
 int     ft_abs(int num);
 
 # endif
