@@ -26,7 +26,7 @@ void	input_save_multiargv(int argc, char **argv, int **inputs, int *num_elements
 	i = 1;
 	while(i < argc)
 	{
-		if (all_digits(argv[i]) && !int_overflow(argv[i]))
+		if (all_digits(argv[i]) && !int_overflow(argv[i], 0, 1, 0))
 			(*inputs)[i - 1] = ft_atoi(argv[i]);
 		else
 			in_fail_multiargv(inputs);
@@ -68,7 +68,7 @@ void	input_save_argvinquote(char **argv, int **inputs, int *num_elements)
 		args_inquote = split_args_inquote(argv, inputs, &count);
 		while (args_inquote[j])
 		{
-			if (all_digits(args_inquote[j]) && !int_overflow(args_inquote[j]))
+			if (all_digits(args_inquote[j]) && !int_overflow(args_inquote[j], 0, 1, 0))
 			{
 				(*inputs)[j] = ft_atoi(args_inquote[j]);
 				j++;

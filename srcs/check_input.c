@@ -15,7 +15,7 @@
 int	all_digits(char *s)
 {
 	int	i;
-	
+
 	i = 0;
 	while (s[i])
 	{
@@ -31,7 +31,7 @@ int	check_double(int *num, int count)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	while (i < count)
 	{
@@ -47,28 +47,8 @@ int	check_double(int *num, int count)
 	return (0);
 }
 
-void	lst_print(t_list *lst)
+int	int_overflow(const char *nptr, size_t i, int sign, long num)
 {
-	int	*value;
-
-	while(lst)
-	{
-		value = (int *)(lst->content);
-		ft_printf("%d ", *value);
-		lst = lst->next;
-	}
-	ft_printf("\n");
-}
-
-int	int_overflow(const char *nptr)
-{
-	size_t		i;
-	int		sign;
-	long		num;
-
-	i = 0;
-	sign = 1;
-	num = 0;
 	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
 		i++;
 	if (nptr[i] == '+' || nptr[i] == '-')
@@ -81,7 +61,7 @@ int	int_overflow(const char *nptr)
 	{
 		if (sign > 0 && num > ((INT_MAX - (nptr[i] - '0')) / 10))
 			return (1);
-		if (sign < 0 && -num < ((INT_MIN + (nptr[i] - '0')) / 10))
+		if (sign < 0 && - num < ((INT_MIN + (nptr[i] - '0')) / 10))
 			return (1);
 		num = num * 10 + (nptr[i] - '0');
 		i++;
@@ -90,7 +70,6 @@ int	int_overflow(const char *nptr)
 		return (1);
 	return (0);
 }
-
 /*
 int	main(void)
 {

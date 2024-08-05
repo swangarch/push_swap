@@ -51,7 +51,7 @@ void run_instruct(t_list **lsta, t_list **lstb, char *instruct)
         rrr_bonus(lsta, lstb);
 }
 
-void check(t_list **lsta, t_list **lstb)
+void check(t_list **lsta, t_list **lstb, int *inputs)
 {
     char	*instruct;
 
@@ -63,6 +63,7 @@ void check(t_list **lsta, t_list **lstb)
         if (!is_instruction(instruct))
         {
 			free(instruct);
+			delete_stack(lsta, lstb, inputs);
             write(2, "Error\n", 6);
             exit(EXIT_FAILURE);
         }
@@ -94,7 +95,7 @@ int	main(int argc, char **argv)
 		input_save_multiargv(argc, argv, &inputs, &num_elements);
 	copy_tab_tolst(&lsta, inputs, num_elements);
 
-	check(&lsta, &lstb);
+	check(&lsta, &lstb, inputs);
 	delete_stack(&lsta, &lstb, inputs);
 	return (0);
 }

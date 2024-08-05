@@ -48,6 +48,6 @@ void	ft_lstclear_nfunc(t_list **lst)
 void	delete_stack(t_list **lsta, t_list **lstb, int	*inputs)
 {
 	ft_lstclear_nfunc(lsta);
-    ft_lstclear_nfunc(lstb);
-    free(inputs);
+	ft_lstclear_nfunc(lstb);
+	free(inputs);
 }
