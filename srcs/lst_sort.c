@@ -12,25 +12,6 @@
 
 #include "push_swap.h"
 
-void    push_start_atob(t_list **lsta, t_list **lstb)
-{
-    if (ft_lstsize(*lsta) == 4)
-    {
-        pb(lsta, lstb);
-    }
-    else if (lst_value(lsta) > lst_value(&((*lsta)->next)))
-    {
-        sa(lsta, lstb);
-        pb(lsta, lstb);
-        pb(lsta, lstb);
-    }
-    else
-    {
-        pb(lsta, lstb);
-        pb(lsta, lstb);
-    }
-}
-
 void    rotate_back(t_list **lsta, t_list **lstb)
 {
     int    i = 0;
@@ -54,36 +35,6 @@ void    rotate_back(t_list **lsta, t_list **lstb)
                 i++;
             }
         }
-}
-
-int     in_range(int start, int end, t_list **lst)
-{
-    if (lst_value(lst) >= start && lst_value(lst) < end)
-        return (1);
-    return (0);
-}
-
-void    lst_stream(t_list **lsta, t_list **lstb, int spliter_x1, int spliter_x2, int spliter_y1, int spliter_y2, int rest)
-{
-    int num_left_ina;
-
-    num_left_ina = ft_lstsize(*lsta);
-    while (num_left_ina > rest)
-    {
-        if (in_range(spliter_x1, spliter_x2, lsta))
-        {
-            pb(lsta, lstb);
-            if (!in_range(spliter_x1, spliter_x2, lsta) && !in_range(spliter_y1, spliter_y2, lsta))
-                rr(lsta, lstb);
-            else
-                rb(lsta, lstb);
-        }
-        else if (in_range(spliter_y1, spliter_y2, lsta))
-            pb(lsta, lstb);
-        else
-            ra(lsta, lstb);
-        num_left_ina--;
-    }
 }
 
 void    lst_stream1(t_list **lsta, t_list **lstb, t_spliter *spl, int rest)
@@ -148,6 +99,26 @@ void    lst_stream2(t_list **lsta, t_list **lstb, t_spliter *spl, int rest)
     }
 }
 
+void    push_start_atob(t_list **lsta, t_list **lstb, t_spliter *spl, int size)
+{
+    int i;
+
+    i = 0;
+    if (size < 100)
+    { 
+        while (size - i > 3)
+        {
+             pb(lsta, lstb);
+             i++;
+        }
+    }
+    else
+    {
+        lst_stream1(lsta, lstb, spl, 0);
+        lst_stream2(lsta, lstb, spl, 2);
+    }
+}
+
 void	lst_sort(t_list **lsta, t_list **lstb, t_spliter *spl)
 {
 	int	size;
@@ -155,23 +126,10 @@ void	lst_sort(t_list **lsta, t_list **lstb, t_spliter *spl)
 
     size = ft_lstsize(*lsta);
 	if (size <= 3)
-		lst_sort_small(lsta, lstb);   /////如果过太小没必要推过去就不推
+		lst_sort_small(lsta, lstb);
 	else
 	{
-        i = 0;
-        if (size < 100)
-        { 
-            while (size - i > 3)
-            {
-                 pb(lsta, lstb);
-                 i++;
-            }
-        }
-        else
-        {
-            lst_stream1(lsta, lstb, spl, 0);
-            lst_stream2(lsta, lstb, spl, 2);
-        }
+        push_start_atob(lsta, lstb, spl, size);
         lst_sort_small(lsta, lstb);
         i = 0;
         while (ft_lstsize(*lstb) > 0)

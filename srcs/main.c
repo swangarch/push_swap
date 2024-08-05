@@ -178,7 +178,7 @@ void	ft_print_array(int *inputs, int num)
 	}
 }
 
-void	set_struct(t_spliter *spl, int *inputs, int num)
+void	set_spliter(t_spliter *spl, int *inputs, int num)
 {
 	spl->spliter_0 = inputs[0];
 	spl->spliter_1 = inputs[num / 4];
@@ -213,11 +213,10 @@ int	main(int argc, char **argv)///检查输入是“包裹起来的情况”
 	copy_tab_tolst(&lsta, inputs, num_elements);
 
 	ft_b_sort(inputs_copy, num_elements);
-	//ft_print_array(inputs_copy, num_elements);
 
 	t_spliter spl;
 
-	set_struct(&spl, inputs_copy, num_elements);
+	set_spliter(&spl, inputs_copy, num_elements);
 
 	push_swap(lsta, lstb, &spl);
 	ft_lstclear_nfunc(&lsta);

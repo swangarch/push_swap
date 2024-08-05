@@ -18,7 +18,7 @@ int     lst_value(t_list **lst)
         return (*((int *)((*lst)->content)));
     else
     {
-        ft_putstr_fd("Error\nTry to get value of a int from NULL struct", 2);
+        ft_putstr_fd("Error\n", 2);
         exit(EXIT_FAILURE);
     }
 }
@@ -31,12 +31,12 @@ int     lst_index_value(t_list *lst, int index)
     curr = lst;
     if (!lst)
     {
-        ft_putstr_fd("Error\nlst not exist\n", 2);
+        ft_putstr_fd("Error\n", 2);
         exit(EXIT_FAILURE);
     }
     if (index > ft_lstsize(lst))
     {
-        ft_putstr_fd("Error\nindex out of range\n", 2);
+        ft_putstr_fd("Error\n", 2);
         exit(EXIT_FAILURE);
     }
     while (i < index)

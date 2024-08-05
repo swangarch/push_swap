@@ -19,7 +19,7 @@ int     lst_index_cmp(t_list *lst, int indexa, int indexb)
 	size = ft_lstsize(lst);
     if (size > 3)
     {
-        ft_putstr_fd("Error\nThis function is not for more than 3 elements\n", 2);
+        ft_putstr_fd("Error\n", 2);
         exit(EXIT_FAILURE);
     }
     if (lst_index_value(lst, indexa) > lst_index_value(lst, indexb))
@@ -58,7 +58,7 @@ void	lst_sort_three(t_list **lsta, t_list **lstb)
 	}
 	else
 	{
-		ft_putstr_fd("error\n", 1);
+		ft_putstr_fd("Error\n", 1);
 		exit(0);
 	}
 }

@@ -43,6 +43,13 @@ void	free_tab(char **tab)
 	tab = NULL;
 }
 
+int     in_range(int start, int end, t_list **lst)
+{
+    if (lst_value(lst) >= start && lst_value(lst) < end)
+        return (1);
+    return (0);
+}
+
 void	print_stack(t_list *lsta, t_list *lstb)
 {
 	ft_printf("stack a: ");

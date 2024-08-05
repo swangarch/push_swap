@@ -49,5 +49,6 @@ int     ft_abs(int num);
 int     lst_max_index(t_list *lst);
 int     lst_min_index(t_list *lst);
 int     ft_abs(int num);
+int     in_range(int start, int end, t_list **lst);
 
 # endif
