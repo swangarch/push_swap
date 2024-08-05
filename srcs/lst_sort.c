@@ -141,6 +141,4 @@ void	lst_sort(t_list **lsta, t_list **lstb, t_spliter *spl)
         }
         rotate_back(lsta, lstb);
     }
-    //print_stack(*lsta, *lstb);
-    //ft_printf("________stack sorted: %s\n", ((lst_sorted(*lsta) && size == ft_lstsize(*lsta)) ? "Yes" : "No"));
 }

@@ -12,35 +12,6 @@
 
 #include "push_swap.h"
 
-int	*save_inputs(int *inputs, int argc, char **argv, int i)
-{
-	inputs = malloc(sizeof(int) * (argc - 1));
-	if (inputs == NULL)
-	{
-		write(2, "Error\n", 6);
-		return (NULL);
-	}
-	while(i < argc)
-	{
-		if (all_digits(argv[i]) && !int_overflow(argv[i]))
-			inputs[i - 1] = ft_atoi(argv[i]);
-		else
-		{
-			write(2, "Error\n", 6);
-			free(inputs);
-			return (NULL);
-		}
-		i++;
-	}
-	if (check_double(inputs, i - 1))
-	{
-		write(2, "Error\n", 6);
-		free(inputs);
-		return (NULL);
-	}
-	return (inputs);
-}
-
 void	input_save_multiargv(int argc, char **argv, int **inputs, int *num_elements)
 {
 	int	i;
@@ -58,30 +29,24 @@ void	input_save_multiargv(int argc, char **argv, int **inputs, int *num_elements
 		if (all_digits(argv[i]) && !int_overflow(argv[i]))
 			(*inputs)[i - 1] = ft_atoi(argv[i]);
 		else
-		{
-			write(2, "Error\n", 6);
-			free(*inputs);
-			exit(EXIT_FAILURE);
-		}
+			in_fail_multiargv(inputs);
 		i++;
 	}
 	if (check_double(*inputs, i - 1))
-	{
-		write(2, "Error\n", 6);
-		free(*inputs);
-		exit(EXIT_FAILURE);
-	}
+		in_fail_multiargv(inputs);
 }
 
 void	input_save_argvinquote(char **argv, int **inputs, int *num_elements)
 {
 		char **args_inquote;
-		int	j = 0;
 		int count = 0;
 
 		args_inquote = ft_split(argv[1], ' ');
 		if (args_inquote == NULL)
+		{	
+			free(inputs);
 			exit(EXIT_FAILURE);
+		}
 		else
 		{
 			while (args_inquote[count])
@@ -93,6 +58,7 @@ void	input_save_argvinquote(char **argv, int **inputs, int *num_elements)
 				exit(EXIT_FAILURE);
 			}
 		}
+		int	j = 0;
 		while (args_inquote[j])
 		{
 			if (all_digits(args_inquote[j]) && !int_overflow(args_inquote[j]))
@@ -101,43 +67,42 @@ void	input_save_argvinquote(char **argv, int **inputs, int *num_elements)
 				j++;
 			}
 			else
-			{
-				write(2, "Error\n", 6);
-				free_tab(args_inquote);
-				free(*inputs);
-				exit(EXIT_FAILURE);
-			}
+				in_fail_argvinquote(inputs, args_inquote);
 		}
 		if (check_double(*inputs, count))
-		{
-			write(2, "Error\n", 6);
-			free_tab(args_inquote);
-			free(*inputs);
-			exit(EXIT_FAILURE);
-		}
+			in_fail_argvinquote(inputs, args_inquote);
 		free_tab(args_inquote);
 		*num_elements = count;
 }
 
-void	copy_tab_tolst(t_list **lst, int *inputs, int num_elements)////maybe use int to return a value
+void	copy_tab_tolst(t_list **lst, int *inputs, int num_elements)
 {
 	int	i;
+	t_list *newnode;
+
 	i = 0;
 	while (i < num_elements)
 	{
-		ft_lstadd_back(lst, ft_lstnew((void *) (&inputs[i])));  //此处如果lstnew fail 有可能leak protect!!!!!!!!!!!!!
+		newnode = ft_lstnew((void *) (&inputs[i]));
+		if (newnode == NULL)
+		{
+			ft_lstclear_nfunc(lst);
+			free(inputs);
+			exit(EXIT_FAILURE);
+		}
+		ft_lstadd_back(lst, newnode);
 		i++;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	int	*inputs;
-	int	*inputs_copy;
-	t_list	*lsta;
-	t_list	*lstb;
-	int num_elements;
-	t_spliter spl;
+	int			*inputs;
+	int			*inputs_copy;
+	t_list		*lsta;
+	t_list		*lstb;
+	int 		num_elements;
+	t_spliter	spl;
 
 	inputs = NULL;
 	lsta = NULL;
@@ -152,7 +117,6 @@ int	main(int argc, char **argv)
 	ft_b_sort(inputs_copy, num_elements);
 	set_spliter(&spl, inputs_copy, num_elements);
 	lst_sort(&lsta, &lstb, &spl);
-	ft_lstclear_nfunc(&lsta);
-	free(inputs);
+	delete_stack(&lsta, &lstb, inputs);
 	return (0);
 }

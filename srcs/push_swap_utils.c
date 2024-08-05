@@ -50,6 +50,19 @@ int     in_range(int start, int end, t_list **lst)
     return (0);
 }
 
+/* void	lst_print(t_list *lst)
+{
+	int	*value;
+
+	while(lst)
+	{
+		value = (int *)(lst->content);
+		ft_printf("%d ", *value);
+		lst = lst->next;
+	}
+	ft_printf("\n");
+} */
+
 /* void	print_stack(t_list *lsta, t_list *lstb)
 {
 	ft_printf("stack a: ");

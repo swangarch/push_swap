@@ -56,4 +56,10 @@ int	*inputs_dup(int *inputs, int num);
 void	ft_b_sort(int *inputs, int num);
 void	set_spliter(t_spliter *spl, int *inputs, int num);
 
+void     delete_stack(t_list **lsta, t_list **lstb, int	*inputs);
+
+void	in_fail_multiargv(int **inputs);
+
+void	in_fail_argvinquote(int **inputs, char **args_inquote);
+
 # endif
