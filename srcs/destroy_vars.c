@@ -23,8 +23,26 @@ void	in_fail_argvinquote(int **inputs, char **args_inquote)
 {
 	write(2, "Error\n", 6);
 	free_tab(args_inquote);
-	free(*inputs);
+	free(inputs);
 	exit(EXIT_FAILURE);
+}
+
+void	ft_lstclear_nfunc(t_list **lst)
+{
+	t_list	*curr;
+	t_list	*freenode;
+
+	curr = *lst;
+	if (*lst == NULL)
+		return ;
+	while (curr != NULL)
+	{
+		freenode = curr;
+		curr = curr->next;
+		free(freenode);
+		freenode = NULL;
+	}
+	*lst = NULL;
 }
 
 void	delete_stack(t_list **lsta, t_list **lstb, int	*inputs)

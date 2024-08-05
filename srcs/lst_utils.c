@@ -95,28 +95,19 @@ int     lst_min_index(t_list *lst)
     return (min_index);
 }
 
-void	ft_lstclear_nfunc(t_list **lst)
+int	lst_sorted(t_list *lst)
 {
-	t_list	*curr;
-	t_list	*freenode;
-
-	curr = *lst;
-	if (*lst == NULL)
-		return ;
-	while (curr != NULL)
-	{
-		freenode = curr;
-		curr = curr->next;
-		free(freenode);
-		freenode = NULL;
-	}
-	*lst = NULL;
-}
-
-void	delete_stack(t_list **lsta, t_list **lstb, int	*inputs)
-{
-	ft_lstclear_nfunc(lsta);
-    ft_lstclear_nfunc(lstb);
-    free(inputs);
+	t_list *currnode;
+	
+	currnode = lst;
+	if (ft_lstsize(lst) <= 1)
+        return (1);
+	while (currnode->next)
+    {
+        if (*((int *)(currnode->content)) > *((int *)(currnode->next->content)))
+            return (0);
+        currnode = currnode->next;
+    }
+    return (1);
 }
 

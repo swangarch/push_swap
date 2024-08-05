@@ -12,22 +12,6 @@
 
 #include "push_swap.h"
 
-int	lst_sorted(t_list *lst)
-{
-	t_list *currnode;
-	
-	currnode = lst;
-	if (ft_lstsize(lst) <= 1)
-        return (1);
-	while (currnode->next)
-    {
-        if (*((int *)(currnode->content)) > *((int *)(currnode->next->content)))
-            return (0);
-        currnode = currnode->next;
-    }
-    return (1);
-}
-
 void	free_tab(char **tab)
 {
 	int	i;
@@ -40,6 +24,7 @@ void	free_tab(char **tab)
 		free(tab[i]);
 		i++;
 	}
+	free(tab);
 	tab = NULL;
 }
 

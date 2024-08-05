@@ -36,29 +36,36 @@ void	input_save_multiargv(int argc, char **argv, int **inputs, int *num_elements
 		in_fail_multiargv(inputs);
 }
 
+char	**split_args_inquote(char **argv, int **inputs, int *count)
+{
+	char	**args_inquote;
+
+	args_inquote = ft_split(argv[1], ' ');
+	if (args_inquote == NULL)
+	{	
+		free(inputs);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		while (args_inquote[(*count)])
+			(*count)++;
+		*inputs = malloc(sizeof(int) * (*count));
+		if (*inputs == NULL)
+			in_fail_argvinquote(inputs, args_inquote);
+	}
+	return (args_inquote);
+}
+
 void	input_save_argvinquote(char **argv, int **inputs, int *num_elements)
 {
-		char **args_inquote;
-		int count = 0;
+		char	**args_inquote;
+		int		count;
+		int		j;
 
-		args_inquote = ft_split(argv[1], ' ');
-		if (args_inquote == NULL)
-		{	
-			free(inputs);
-			exit(EXIT_FAILURE);
-		}
-		else
-		{
-			while (args_inquote[count])
-				count++;
-			*inputs = malloc(sizeof(int) * (count));
-			if (!inputs)
-			{
-				free_tab(args_inquote);
-				exit(EXIT_FAILURE);
-			}
-		}
-		int	j = 0;
+		count = 0;
+		j = 0;
+		args_inquote = split_args_inquote(argv, inputs, &count);
 		while (args_inquote[j])
 		{
 			if (all_digits(args_inquote[j]) && !int_overflow(args_inquote[j]))
@@ -77,8 +84,8 @@ void	input_save_argvinquote(char **argv, int **inputs, int *num_elements)
 
 void	copy_tab_tolst(t_list **lst, int *inputs, int num_elements)
 {
-	int	i;
-	t_list *newnode;
+	int		i;
+	t_list	*newnode;
 
 	i = 0;
 	while (i < num_elements)

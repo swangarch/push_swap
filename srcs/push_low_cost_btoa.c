@@ -12,6 +12,12 @@
 
 #include "push_swap.h"
 
+void    update_target(int *target_index, int *find_target, int i)
+{
+    *target_index = i;
+    *find_target = 1;
+}
+
 int     target_index_btoa(t_list *lsta, t_list *lstb, int indexb, int i)
 {
     int target_index;
@@ -23,7 +29,7 @@ int     target_index_btoa(t_list *lsta, t_list *lstb, int indexb, int i)
 
     b_value = lst_index_value(lstb, indexb);
     a_size = ft_lstsize(lsta);
-    smallest_diff = (long)INT_MAX * 2 + 1;///?????/
+    smallest_diff = (long)INT_MAX * 2 + 1;
     curr_a = lsta;
     while (i < a_size)
     {
@@ -32,8 +38,7 @@ int     target_index_btoa(t_list *lsta, t_list *lstb, int indexb, int i)
         if (lst_value(&curr_a) - b_value < smallest_diff && lst_value(&curr_a) > b_value)
         {
             smallest_diff = lst_value(&curr_a) - b_value;
-            target_index = i;
-            find_target = 1;
+            update_target(&target_index, &find_target, i);
         }
         i++;
     }
