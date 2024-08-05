@@ -124,6 +124,8 @@ void	lst_sort(t_list **lsta, t_list **lstb, t_spliter *spl)
 	int	size;
     int i;
 
+    if (lst_sorted(*lsta))
+		return ;
     size = ft_lstsize(*lsta);
 	if (size <= 3)
 		lst_sort_small(lsta, lstb);

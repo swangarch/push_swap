@@ -95,3 +95,21 @@ int     lst_min_index(t_list *lst)
     return (min_index);
 }
 
+void	ft_lstclear_nfunc(t_list **lst)
+{
+	t_list	*curr;
+	t_list	*freenode;
+
+	curr = *lst;
+	if (*lst == NULL)
+		return ;
+	while (curr != NULL)
+	{
+		freenode = curr;
+		curr = curr->next;
+		free(freenode);
+		freenode = NULL;
+	}
+	*lst = NULL;
+}
+

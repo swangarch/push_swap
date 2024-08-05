@@ -130,20 +130,32 @@ void	copy_tab_tolst(t_list **lst, int *inputs, int num_elements)////maybe use in
 	}
 }
 
-void	push_swap(t_list *lsta, t_list *lstb, t_spliter *spl)
+/* void	push_swap(t_list *lsta, t_list *lstb, t_spliter *spl)
 {
 	if (lst_sorted(lsta))
 		return ;
 	lst_sort(&lsta, &lstb, spl);
-}
+} */
 
-void	ft_swap(int *a, int *b)
+int	*inputs_dup(int *inputs, int num)
 {
-	int temp;
+	int	i;
+	int *inputs_copy;
 
-	temp = *a;
-	*a = *b;
-	*b = temp;
+	i = 0;
+	inputs_copy = malloc(sizeof(int) * num);
+	if (inputs_copy == NULL)
+	{
+		free(inputs);
+		write(2, "Error\n", 6);
+		exit(EXIT_FAILURE);
+	}
+	while (i < num)
+	{
+		inputs_copy[i] = inputs[i];
+		i++;
+	}
+	return (inputs_copy);
 }
 
 void	ft_b_sort(int *inputs, int num)
@@ -166,7 +178,7 @@ void	ft_b_sort(int *inputs, int num)
 	}
 }
 
-void	ft_print_array(int *inputs, int num)
+/* void	ft_print_array(int *inputs, int num)
 {
 	int	i;
 
@@ -176,7 +188,7 @@ void	ft_print_array(int *inputs, int num)
 		ft_printf("%d\n", inputs[i]);
 		i++;
 	}
-}
+} */
 
 void	set_spliter(t_spliter *spl, int *inputs, int num)
 {
@@ -185,42 +197,32 @@ void	set_spliter(t_spliter *spl, int *inputs, int num)
 	spl->spliter_2 = inputs[num / 4 * 2];
 	spl->spliter_3 = inputs[num / 4 * 3];
 	spl->spliter_4 = inputs[num -1];
+	free(inputs);
 }	
 
-int	main(int argc, char **argv)///检查输入是“包裹起来的情况”
+int	main(int argc, char **argv)
 {
 	int	*inputs;
 	int	*inputs_copy;
 	t_list	*lsta;
 	t_list	*lstb;
 	int num_elements;
+	t_spliter spl;
 
 	inputs = NULL;
 	lsta = NULL;
 	lstb = NULL;
 	num_elements = 0;
-
 	if (argc == 2)
-	{
 		input_save_argvinquote(argv, &inputs, &num_elements);
-		input_save_argvinquote(argv, &inputs_copy, &num_elements);
-	}
 	else
-	{
 		input_save_multiargv(argc, argv, &inputs, &num_elements);
-		input_save_multiargv(argc, argv, &inputs_copy, &num_elements);
-	}
 	copy_tab_tolst(&lsta, inputs, num_elements);
-
+	inputs_copy = inputs_dup(inputs, num_elements);
 	ft_b_sort(inputs_copy, num_elements);
-
-	t_spliter spl;
-
 	set_spliter(&spl, inputs_copy, num_elements);
-
-	push_swap(lsta, lstb, &spl);
+	lst_sort(&lsta, &lstb, &spl);
 	ft_lstclear_nfunc(&lsta);
 	free(inputs);
-	free(inputs_copy);
 	return (0);
 }
