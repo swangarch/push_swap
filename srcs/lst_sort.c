@@ -6,7 +6,7 @@
 /*   By: shuwang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:44:25 by shuwang           #+#    #+#             */
-/*   Updated: 2024/08/05 19:41:01 by shuwang          ###   ########.fr       */
+/*   Updated: 2024/08/05 19:49:58 by shuwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,20 @@ void	rotate_back(t_list **lsta, t_list **lstb)
 void	lst_stream1(t_list **lsta, t_list **lstb, t_spliter *spl, int rest)
 {
 	int	num_left_ina;
-	int	x1;
-	int	x2;
-	int	y1;
-	int	y2;
 
-	x1 = spl->spliter_1;
-	x2 = spl->spliter_2;
-	y1 = spl->spliter_2;
-	y2 = spl->spliter_3;
 	num_left_ina = ft_lstsize(*lsta);
 	while (num_left_ina > rest)
 	{
-		if (in_range(x1, x2, lsta))
+		if (in_range(spl->spliter_1, spl->spliter_2, lsta))
 		{
 			pb(lsta, lstb);
-			if (!in_range(x1, x2, lsta) && !in_range(y1, y2, lsta))
+			if (!in_range(spl->spliter_1, spl->spliter_2, lsta) && \
+					!in_range(spl->spliter_2, spl->spliter_3, lsta))
 				rr(lsta, lstb);
 			else
 				rb(lsta, lstb);
 		}
-		else if (in_range(y1, y2, lsta))
+		else if (in_range(spl->spliter_2, spl->spliter_3, lsta))
 			pb(lsta, lstb);
 		else
 			ra(lsta, lstb);
@@ -73,27 +66,20 @@ void	lst_stream1(t_list **lsta, t_list **lstb, t_spliter *spl, int rest)
 void	lst_stream2(t_list **lsta, t_list **lstb, t_spliter *spl, int rest)
 {
 	int	num_left_ina;
-	int	x1;
-	int	x2;
-	int	y1;
-	int	y2;
 
-	x1 = spl->spliter_0;
-	x2 = spl->spliter_1;
-	y1 = spl->spliter_3;
-	y2 = spl->spliter_4;
 	num_left_ina = ft_lstsize(*lsta);
 	while (num_left_ina > rest)
 	{
-		if (in_range(x1, x2, lsta))
+		if (in_range(spl->spliter_0, spl->spliter_1, lsta))
 		{
 			pb(lsta, lstb);
-			if (!in_range(x1, x2, lsta) && !in_range(y1, y2, lsta))
+			if (!in_range(spl->spliter_0, spl->spliter_1, lsta) && \
+					!in_range(spl->spliter_3, spl->spliter_4, lsta))
 				rr(lsta, lstb);
 			else
 				rb(lsta, lstb);
 		}
-		else if (in_range(y1, y2, lsta))
+		else if (in_range(spl->spliter_3, spl->spliter_4, lsta))
 			pb(lsta, lstb);
 		else
 			ra(lsta, lstb);
