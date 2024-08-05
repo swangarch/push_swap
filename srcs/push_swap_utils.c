@@ -50,13 +50,13 @@ int     in_range(int start, int end, t_list **lst)
     return (0);
 }
 
-void	print_stack(t_list *lsta, t_list *lstb)
+/* void	print_stack(t_list *lsta, t_list *lstb)
 {
 	ft_printf("stack a: ");
 	lst_print(lsta);
 	ft_printf("stack b: ");
 	lst_print(lstb);
-}
+} */
 
 int     ft_abs(int num)
 {

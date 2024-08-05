@@ -52,4 +52,8 @@ int     ft_abs(int num);
 int     in_range(int start, int end, t_list **lst);
 void	ft_swap(int *a, int *b);
 
+int	*inputs_dup(int *inputs, int num);
+void	ft_b_sort(int *inputs, int num);
+void	set_spliter(t_spliter *spl, int *inputs, int num);
+
 # endif
