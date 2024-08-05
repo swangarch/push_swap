@@ -6,7 +6,7 @@
 /*   By: shuwang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 15:42:18 by shuwang           #+#    #+#             */
-/*   Updated: 2024/08/05 19:58:15 by shuwang          ###   ########.fr       */
+/*   Updated: 2024/08/05 20:05:52 by shuwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ int	lst_max_index(t_list *lst)
 
 int	lst_min_index(t_list *lst)
 {
-	int	i;
-	int	min;
-	int	min_index;
+	int		i;
+	int		min;
+	int		min_index;
 	t_list	*curr;
 
 	min = INT_MAX;
@@ -99,7 +99,7 @@ int	lst_min_index(t_list *lst)
 int	lst_sorted(t_list *lst)
 {
 	t_list	*currnode;
-	
+
 	currnode = lst;
 	if (ft_lstsize(lst) <= 1)
 		return (1);

@@ -6,17 +6,17 @@
 /*   By: shuwang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 18:30:52 by shuwang           #+#    #+#             */
-/*   Updated: 2024/08/05 18:30:54 by shuwang          ###   ########.fr       */
+/*   Updated: 2024/08/05 20:44:32 by shuwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	input_save_multiargv(int argc, char **argv, int **inputs, int *num_elements)
+void	input_save_multiargv(int argc, char **argv, int **inputs, int *num)
 {
 	int	i;
 
-	*num_elements = argc - 1;
+	*num = argc - 1;
 	*inputs = malloc(sizeof(int) * (argc - 1));
 	if (*inputs == NULL)
 	{
@@ -24,7 +24,7 @@ void	input_save_multiargv(int argc, char **argv, int **inputs, int *num_elements
 		exit(EXIT_FAILURE);
 	}
 	i = 1;
-	while(i < argc)
+	while (i < argc)
 	{
 		if (all_digits(argv[i]) && !int_overflow(argv[i], 0, 1, 0))
 			(*inputs)[i - 1] = ft_atoi(argv[i]);
@@ -59,27 +59,28 @@ char	**split_args_inquote(char **argv, int **inputs, int *count)
 
 void	input_save_argvinquote(char **argv, int **inputs, int *num_elements)
 {
-		char	**args_inquote;
-		int		count;
-		int		j;
+	char	**args_inquote;
+	int		count;
+	int		j;
 
-		count = 0;
-		j = 0;
-		args_inquote = split_args_inquote(argv, inputs, &count);
-		while (args_inquote[j])
+	count = 0;
+	j = 0;
+	args_inquote = split_args_inquote(argv, inputs, &count);
+	while (args_inquote[j])
+	{
+		if (all_digits(args_inquote[j]) && \
+				!int_overflow(args_inquote[j], 0, 1, 0))
 		{
-			if (all_digits(args_inquote[j]) && !int_overflow(args_inquote[j], 0, 1, 0))
-			{
-				(*inputs)[j] = ft_atoi(args_inquote[j]);
-				j++;
-			}
-			else
-				in_fail_argvinquote(inputs, args_inquote);
+			(*inputs)[j] = ft_atoi(args_inquote[j]);
+			j++;
 		}
-		if (check_double(*inputs, count))
+		else
 			in_fail_argvinquote(inputs, args_inquote);
-		free_tab(args_inquote);
-		*num_elements = count;
+	}
+	if (check_double(*inputs, count))
+		in_fail_argvinquote(inputs, args_inquote);
+	free_tab(args_inquote);
+	*num_elements = count;
 }
 
 void	copy_tab_tolst(t_list **lst, int *inputs, int num_elements)
@@ -90,7 +91,7 @@ void	copy_tab_tolst(t_list **lst, int *inputs, int num_elements)
 	i = 0;
 	while (i < num_elements)
 	{
-		newnode = ft_lstnew((void *) (&inputs[i]));
+		newnode = ft_lstnew((void *)(&inputs[i]));
 		if (newnode == NULL)
 		{
 			ft_lstclear_nfunc(lst);

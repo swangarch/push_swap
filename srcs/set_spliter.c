@@ -6,7 +6,7 @@
 /*   By: shuwang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 14:49:08 by shuwang           #+#    #+#             */
-/*   Updated: 2024/08/05 14:49:10 by shuwang          ###   ########.fr       */
+/*   Updated: 2024/08/05 20:08:33 by shuwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	*inputs_dup(int *inputs, int num)
 {
 	int	i;
-	int *inputs_copy;
+	int	*inputs_copy;
 
 	i = 0;
 	inputs_copy = malloc(sizeof(int) * num);
@@ -35,8 +35,8 @@ int	*inputs_dup(int *inputs, int num)
 
 void	ft_b_sort(int *inputs, int num)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -61,5 +61,4 @@ void	set_spliter(t_spliter *spl, int *inputs, int num)
 	spl->spliter_3 = inputs[num / 4 * 3];
 	spl->spliter_4 = inputs[num -1];
 	free(inputs);
-}	
-
+}

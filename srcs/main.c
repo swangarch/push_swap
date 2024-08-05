@@ -6,7 +6,7 @@
 /*   By: shuwang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:56:55 by shuwang           #+#    #+#             */
-/*   Updated: 2024/07/02 16:57:04 by shuwang          ###   ########.fr       */
+/*   Updated: 2024/08/05 20:14:53 by shuwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 	int			*inputs_copy;
 	t_list		*lsta;
 	t_list		*lstb;
-	int 		num_elements;
+	int		num_elements;
 	t_spliter	spl;
 
 	inputs = NULL;
