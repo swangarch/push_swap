@@ -63,7 +63,6 @@ int     in_range(int start, int end, t_list **lst)
     return (0);
 }
 
-
 void    lst_stream(t_list **lsta, t_list **lstb, int spliter_x1, int spliter_x2, int spliter_y1, int spliter_y2, int rest)
 {
     int num_left_ina;
@@ -103,8 +102,20 @@ void	lst_sort(t_list **lsta, t_list **lstb, t_spliter *spl)
 		lst_sort_small(lsta, lstb);   /////如果过太小没必要推过去就不推
 	else
 	{
-        lst_stream(lsta, lstb, spliter_1, spliter_2, spliter_2, spliter_3, 2);
-        lst_stream(lsta, lstb, spliter_0, spliter_1, spliter_3, spliter_4, 2);
+        i = 0;
+        if (size < 1001)
+        { 
+            while (size - i > 3)
+            {
+                 pb(lsta, lstb);
+                 i++;
+            }
+        }
+        else
+        {
+            lst_stream(lsta, lstb, spliter_1, spliter_2, spliter_2, spliter_3, 0);
+            lst_stream(lsta, lstb, spliter_0, spliter_1, spliter_3, spliter_4, 2);
+        }
         lst_sort_small(lsta, lstb);
         i = 0;
         while (ft_lstsize(*lstb) > 0)
