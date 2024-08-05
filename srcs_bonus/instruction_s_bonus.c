@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "libft/libft.h"
+#include "push_swap_bonus.h"
 
 static void    s(t_list **lst)
 {

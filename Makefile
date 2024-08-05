@@ -25,11 +25,12 @@ INCLUDE = -I./libft -I./header
 SRCS = srcs/main.c srcs/lst_sort.c srcs/instruction_p.c srcs/instruction_r.c srcs/instruction_rv.c \
     	srcs/instruction_s.c srcs/push_swap_utils.c srcs/check_input.c srcs/lst_sort_small.c \
 	    srcs/push_low_cost_btoa.c srcs/lst_utils.c srcs/rotate_to_top.c srcs/set_spliter.c \
-		srcs/destroy_vars.c
+		srcs/destroy_vars.c srcs/parse_args.c
 
-BONUS_SRCS = srcs_bonus/instruction_p_bonus.c srcs_bonus/instruction_r_bonus.c \
+SRCS_BONUS = srcs_bonus/instruction_p_bonus.c srcs_bonus/instruction_r_bonus.c \
 		srcs_bonus/instruction_rv_bonus.c srcs_bonus/instruction_s_bonus.c \
-		push_swap_utils.c check_input.c cheker_bonus.c
+		srcs/push_swap_utils.c srcs/check_input.c srcs_bonus/checker_bonus.c srcs/destroy_vars.c \
+		srcs/parse_args.c srcs/lst_utils.c
 
 all: $(NAME)
 

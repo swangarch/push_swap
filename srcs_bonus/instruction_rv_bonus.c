@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "libft/libft.h"
+#include "push_swap_bonus.h"
 
 static void    rv(t_list **lst)
 {
@@ -31,23 +30,20 @@ static void    rv(t_list **lst)
     *lst = last;
 }
 
-void    rra(t_list **lsta, t_list **lstb)
+void    rra_bonus(t_list **lsta, t_list **lstb)
 {
     (void)lstb;
     rv(lsta);
-    ft_printf("rra\n");
 }
 
-void    rrb(t_list **lsta, t_list **lstb)
+void    rrb_bonus(t_list **lsta, t_list **lstb)
 {
     (void)lsta;
     rv(lstb);
-    ft_printf("rrb\n");
 }
 
-void    rrr(t_list **lsta, t_list **lstb)
+void    rrr_bonus(t_list **lsta, t_list **lstb)
 {
     rv(lsta);
     rv(lstb);
-    ft_printf("rrr\n");
 }

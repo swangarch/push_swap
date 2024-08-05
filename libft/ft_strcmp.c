@@ -1,41 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_r.c                                    :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shuwang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/15 15:38:41 by shuwang           #+#    #+#             */
-/*   Updated: 2024/07/15 15:38:42 by shuwang          ###   ########.fr       */
+/*   Created: 2024/07/22 15:13:18 by shuwang           #+#    #+#             */
+/*   Updated: 2024/07/22 15:13:48 by shuwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap_bonus.h"
+#include "libft.h"
 
-static void    r(t_list **lst)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-    t_list *temp;
+	size_t	i;
+	int		diff;
 
-    temp = *lst;
-    *lst = (*lst)->next;
-    temp->next = NULL;
-    ft_lstadd_back(lst, temp);
+	diff = 0;
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] == s2[i])
+			i++;
+		else
+		{
+			diff = (unsigned char)s1[i] \
+				- (unsigned char)s2[i];
+			break ;
+		}
+	}
+	return (diff);
 }
-
-void    ra_bonus(t_list **lsta, t_list **lstb)
+/*
+#include <string.h>
+int main(int ac, char **av)
 {
-    (void)lstb;
-    r(lsta);
-}
-
-void    rb_bonus(t_list **lsta, t_list **lstb)
-{
-    (void)lsta;
-    r(lstb);
-}
-
-void    rr_bonus(t_list **lsta, t_list **lstb)
-{
-    r(lsta);
-    r(lstb);
-}
+    ft_printf("%d\n%d\n", ft_strcmp(av[1], av[2]), strcmp(av[1], av[2]));
+    return (0);
+}*/

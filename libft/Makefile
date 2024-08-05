@@ -30,7 +30,8 @@ SRCS = ft_atoi.c ft_memchr.c ft_split.c ft_strncmp.c \
 	ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c \
 	ft_lstlast.c ft_lstmap.c ft_lstnew.c get_next_line.c \
 	get_next_line_utils.c ft_printf.c ft_putchar_ptf.c ft_putnbr_ptf.c \
-	ft_putptr_ptf.c ft_putstr_ptf.c ft_putunbr_ptf.c ft_putx_ptf.c
+	ft_putptr_ptf.c ft_putstr_ptf.c ft_putunbr_ptf.c ft_putx_ptf.c \
+	ft_strcmp.c
 
 OBJS = $(SRCS:.c=.o)
 

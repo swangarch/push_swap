@@ -56,10 +56,13 @@ int	    *inputs_dup(int *inputs, int num);
 void	ft_b_sort(int *inputs, int num);
 void	set_spliter(t_spliter *spl, int *inputs, int num);
 
-void     delete_stack(t_list **lsta, t_list **lstb, int	*inputs);
-
 void	in_fail_multiargv(int **inputs);
 void	in_fail_argvinquote(int **inputs, char **args_inquote);
 void	delete_stack(t_list **lsta, t_list **lstb, int	*inputs);
+
+void	input_save_multiargv(int argc, char **argv, int **inputs, int *num_elements);
+char	**split_args_inquote(char **argv, int **inputs, int *count);
+void	input_save_argvinquote(char **argv, int **inputs, int *num_elements);
+void	copy_tab_tolst(t_list **lst, int *inputs, int num_elements);
 
 # endif

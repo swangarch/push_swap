@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "libft/libft.h"
+#include "push_swap_bonus.h"
 
-static void p_bonus(t_list **lst1, t_list **lst2)
+static void p(t_list **lst1, t_list **lst2)
 {
     t_list  *temp;
 
@@ -27,11 +26,9 @@ static void p_bonus(t_list **lst1, t_list **lst2)
 void    pa_bonus(t_list **lsta, t_list **lstb)
 {
     p(lstb, lsta);
-    ft_printf("pa\n");
 }
 
 void    pb_bonus(t_list **lsta, t_list **lstb)
 {
     p(lsta, lstb);
-    ft_printf("pb\n");
 }
