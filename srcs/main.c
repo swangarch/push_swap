@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	int			*inputs;
 	t_list		*lsta;
 	t_list		*lstb;
-	int		num_elements;
+	int			num_elements;
 	t_spliter	spl;
 
 	inputs = NULL;
