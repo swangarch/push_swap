@@ -19,7 +19,7 @@
 int     all_digits(char *s);
 int     check_double(int *num, int count);
 void	lst_print(t_list *lst);
-int     int_overflow(const char *nptr);
+int	    int_overflow(const char *nptr, size_t i, int sign, long	num);
 
 void    sa_bonus(t_list **lsta, t_list **lstb);
 void    sb_bonus(t_list **lsta, t_list **lstb);

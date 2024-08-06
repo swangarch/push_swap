@@ -27,6 +27,8 @@ int     target_index_btoa(t_list *lsta, t_list *lstb, int indexb, int i)
 	int		a_size;
 	t_list	*curr_a;
 
+	target_index = 0;
+	find_target = 0;
 	b_value = lst_index_value(lstb, indexb);
 	a_size = ft_lstsize(lsta);
 	smallest_diff = (long)INT_MAX * 2 + 1;

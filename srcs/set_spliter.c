@@ -79,4 +79,5 @@ void	set_spliter(t_spliter *spl, int *inputs, int num, t_list *lst)
 	spl->spliter_3 = inputs_copy[num / 4 * 3];
 	spl->spliter_4 = inputs_copy[num -1];
 	free(inputs_copy);
+	inputs_copy = NULL;
 }

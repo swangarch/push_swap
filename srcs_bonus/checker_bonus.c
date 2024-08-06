@@ -54,7 +54,7 @@ void	run_instruct(t_list **lsta, t_list **lstb, char *instruct)
 		rrr_bonus(lsta, lstb);
 }
 
-void	in_not_instruction(t_list **lsta, t_list **lstb, int *inputs, char	*instruct)
+void	destroy_instruction(t_list **lsta, t_list **lstb, int *inputs, char	*instruct)
 {
 	free(instruct);
 	delete_stack(lsta, lstb, inputs);
@@ -67,11 +67,10 @@ void	check(t_list **lsta, t_list **lstb, int *inputs)
 	char	*instruct;
 
 	instruct = get_next_line(STDIN_FILENO);
-	in_not_instruction(lsta, lstb, inputs, instruct);
 	while (instruct != NULL)
 	{
 		if (!is_instruction(instruct))
-			in_not_instruction(lsta, lstb, inputs, instruct);
+			destroy_instruction(lsta, lstb, inputs, instruct);
 		run_instruct(lsta, lstb, instruct);
 		free(instruct);
 		instruct = get_next_line(STDIN_FILENO);

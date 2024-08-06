@@ -50,9 +50,6 @@ char	**split_args_inquote(char **argv, int **inputs, int *count)
 	{
 		while (args_inquote[(*count)])
 			(*count)++;
-		//ft_printf("count malloc size is %d\n", (*count));
-		if (*count == 0)
-			*count = 1;
 		*inputs = malloc(sizeof(int) * (*count));
 		if (*inputs == NULL)
 			in_fail_argvinquote(inputs, args_inquote);
