@@ -99,7 +99,8 @@ int	main(int argc, char **argv)
 	else
 		input_save_multiargv(argc, argv, &inputs, &num_elements);
 	copy_tab_tolst(&lsta, inputs, num_elements);
-	check(&lsta, &lstb, inputs);
+	if (num_elements > 0)
+		check(&lsta, &lstb, inputs);
 	delete_stack(&lsta, &lstb, inputs);
 	return (0);
 }
