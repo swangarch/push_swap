@@ -15,7 +15,6 @@
 int	main(int argc, char **argv)
 {
 	int			*inputs;
-	int			*inputs_copy;
 	t_list		*lsta;
 	t_list		*lstb;
 	int		num_elements;
@@ -30,9 +29,7 @@ int	main(int argc, char **argv)
 	else
 		input_save_multiargv(argc, argv, &inputs, &num_elements);
 	copy_tab_tolst(&lsta, inputs, num_elements);
-	inputs_copy = inputs_dup(inputs, num_elements);
-	ft_b_sort(inputs_copy, num_elements);
-	set_spliter(&spl, inputs_copy, num_elements);
+	set_spliter(&spl, inputs, num_elements, lsta);
 	lst_sort(&lsta, &lstb, &spl);
 	delete_stack(&lsta, &lstb, inputs);
 	return (0);

@@ -65,7 +65,7 @@ void	ft_swap(int *a, int *b);
 
 int	*inputs_dup(int *inputs, int num);
 void	ft_b_sort(int *inputs, int num);
-void	set_spliter(t_spliter *spl, int *inputs, int num);
+void	set_spliter(t_spliter *spl, int *inputs, int num, t_list *lst);
 
 void	in_fail_multiargv(int **inputs);
 void	in_fail_argvinquote(int **inputs, char **args_inquote);

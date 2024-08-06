@@ -53,12 +53,30 @@ void	ft_b_sort(int *inputs, int num)
 	}
 }
 
-void	set_spliter(t_spliter *spl, int *inputs, int num)
+void	set_spliter(t_spliter *spl, int *inputs, int num, t_list *lst)
 {
-	spl->spliter_0 = inputs[0];
-	spl->spliter_1 = inputs[num / 4];
-	spl->spliter_2 = inputs[num / 4 * 2];
-	spl->spliter_3 = inputs[num / 4 * 3];
-	spl->spliter_4 = inputs[num -1];
-	free(inputs);
+	int	*inputs_copy;
+
+	if (num <= 0)
+	{
+		write(2, "Error\n", 6);
+		free(inputs);
+		ft_lstclear_nfunc(&lst);
+		exit(EXIT_FAILURE);
+	}
+	inputs_copy = inputs_dup(inputs, num);
+	if (inputs_copy == NULL)
+	{
+		free(inputs);
+		write(2, "Error\n", 6);
+		ft_lstclear_nfunc(&lst);
+		exit(EXIT_FAILURE);
+	}
+	ft_b_sort(inputs_copy, num);
+	spl->spliter_0 = inputs_copy[0];
+	spl->spliter_1 = inputs_copy[num / 4];
+	spl->spliter_2 = inputs_copy[num / 4 * 2];
+	spl->spliter_3 = inputs_copy[num / 4 * 3];
+	spl->spliter_4 = inputs_copy[num -1];
+	free(inputs_copy);
 }
