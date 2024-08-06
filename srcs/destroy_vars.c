@@ -22,8 +22,8 @@ void	in_fail_multiargv(int **inputs)
 void	in_fail_argvinquote(int **inputs, char **args_inquote)
 {
 	write(2, "Error\n", 6);
+	free(*inputs);
 	free_tab(args_inquote);
-	free(inputs);
 	exit(EXIT_FAILURE);
 }
 
