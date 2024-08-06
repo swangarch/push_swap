@@ -6,7 +6,7 @@
 /*   By: shuwang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 18:42:27 by shuwang           #+#    #+#             */
-/*   Updated: 2024/08/06 13:50:54 by shuwang          ###   ########.fr       */
+/*   Updated: 2024/08/06 19:04:24 by shuwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	run_instruct(t_list **lsta, t_list **lstb, char *instruct)
 		rrr_bonus(lsta, lstb);
 }
 
-void	destroy_instruction(t_list **lsta, t_list **lstb, int *inputs, char	*instruct)
+void	destroy_instruction(t_list **lsta, t_list **lstb, int *inputs, \
+		char *instruct)
 {
 	free(instruct);
 	delete_stack(lsta, lstb, inputs);

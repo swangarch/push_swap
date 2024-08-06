@@ -12,42 +12,39 @@
 
 #include "push_swap.h"
 
-void    update_target(int *target_index, int *find_target, int i)
+void	update_target(int *target_index, int *find_target, int i)
 {
 	*target_index = i;
 	*find_target = 1;
 }
 
-int     target_index_btoa(t_list *lsta, t_list *lstb, int indexb, int i)
+int	target_index_btoa(t_list *lsta, t_list *lstb, int indexb, int i)
 {
-	int		target_index;
-	long	smallest_diff;
-	int		find_target;
-	int		b_value;
-	int		a_size;
 	t_list	*curr_a;
+	t_vars	vars;
 
-	target_index = 0;
-	find_target = 0;
-	b_value = lst_index_value(lstb, indexb);
-	a_size = ft_lstsize(lsta);
-	smallest_diff = (long)INT_MAX * 2 + 1;
+	vars.target_index = 0;
+	vars.find_target = 0;
+	vars.b_value = lst_index_value(lstb, indexb);
+	vars.smallest_diff = (long)INT_MAX * 2 + 1;
+	vars.a_size = ft_lstsize(lsta);
 	curr_a = lsta;
-	while (i < a_size)
+	while (i < vars.a_size)
 	{
 		if (i != 0 && curr_a->next)
 			curr_a = curr_a->next;
-		if (lst_value(&curr_a) - b_value < smallest_diff && lst_value(&curr_a) > b_value)
+		if (lst_value(&curr_a) - vars.b_value < vars.smallest_diff \
+			&& lst_value(&curr_a) > vars.b_value)
 		{
-			smallest_diff = lst_value(&curr_a) - b_value;
-			update_target(&target_index, &find_target, i);
+			vars.smallest_diff = lst_value(&curr_a) - vars.b_value;
+			update_target(&vars.target_index, &vars.find_target, i);
 		}
 		i++;
 	}
-	if (find_target == 0)
+	if (vars.find_target == 0)
 		return (lst_min_index(lsta));
 	else
-		return (target_index);
+		return (vars.target_index);
 }
 
 int	total_cost_btoa(t_list *lsta, t_list *lstb, int indexb)
@@ -109,7 +106,7 @@ void	push_low_cost_btoa(t_list **lsta, t_list **lstb)
 	int	indexb_topush;
 
 	indexb_topush = min_cost_index_btoa(*lsta, *lstb);
-	stepa = step_move_top(*lsta, target_index_btoa\
+	stepa = step_move_top(*lsta, target_index_btoa \
 			(*lsta, *lstb, indexb_topush, 0));
 	stepb = step_move_top(*lstb, indexb_topush);
 	push_move_tog(lsta, lstb, &stepa, &stepb);
