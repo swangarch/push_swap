@@ -55,6 +55,8 @@ int	int_overflow(const char *nptr, size_t i, int sign, long num)
 	{
 		if (nptr[i] == '-')
 			sign = -sign;
+		if (!nptr[i + 1])
+			return (1);
 		i++;
 	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')

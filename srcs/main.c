@@ -12,6 +12,15 @@
 
 #include "push_swap.h"
 
+void	check_void_input(char *input)
+{
+	if (ft_strlen(input) == 0)
+	{
+		write(2, "Error\n", 6);
+		exit(EXIT_FAILURE);
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	int			*inputs;
@@ -27,7 +36,10 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	if (argc == 2)
+	{
+		check_void_input(argv[1]);
 		input_save_argvinquote(argv, &inputs, &num_elements);
+	}
 	else
 		input_save_multiargv(argc, argv, &inputs, &num_elements);
 	copy_tab_tolst(&lsta, inputs, num_elements);
