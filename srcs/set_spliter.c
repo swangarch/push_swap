@@ -57,12 +57,11 @@ void	set_spliter(t_spliter *spl, int *inputs, int num, t_list *lst)
 {
 	int	*inputs_copy;
 
-	if (num <= 0)
+	if (num == 0)
 	{
-		write(2, "Error\n", 6);
 		free(inputs);
 		ft_lstclear_nfunc(&lst);
-		exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS);
 	}
 	inputs_copy = inputs_dup(inputs, num);
 	if (inputs_copy == NULL)

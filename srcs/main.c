@@ -24,6 +24,8 @@ int	main(int argc, char **argv)
 	lsta = NULL;
 	lstb = NULL;
 	num_elements = 0;
+	if (argc == 1)
+		return (0);
 	if (argc == 2)
 		input_save_argvinquote(argv, &inputs, &num_elements);
 	else

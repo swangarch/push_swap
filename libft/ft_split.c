@@ -12,11 +12,15 @@
 
 #include "libft.h"
 
-static	void	ft_init(size_t *i, size_t *j, int *count)
+static	void	ft_init(size_t *i, size_t *j, char const *s, char c)
 {
 	*i = 0;
 	*j = 0;
-	*count = 0;
+	while (s[*i] && s[*i] == c)
+	{
+		(*j)++;
+		(*i)++;
+	}
 }
 
 static	int	c_word(char const *s, char c)
@@ -86,12 +90,11 @@ char	**ft_split(char const *s, char c)
 	int			count;
 	char		**tabstr;
 
-	ft_init(&i, &j, &count);
+	count = 0;
 	tabstr = malloc((c_word(s, c) + 1) * sizeof(char *));
 	if (tabstr == NULL)
 		return (NULL);
-	while (s[i] && s[i++] == c)
-		j++;
+	ft_init(&i, &j, s, c);
 	while (i < ft_strlen(s))
 	{
 		if (s[i] == c || i + 1 == ft_strlen(s))
@@ -121,7 +124,6 @@ void	testsplit(char **s)
 	}
 	printf("\n");
 }
-
 int	main(void)
 {	
 	//printf("%d\n", c_word(" Hello world  aq  my  friend i", ' '));
@@ -140,7 +142,8 @@ int	main(void)
 	//testsplit(ft_split("Hello", ' '));
 	//testsplit(ft_split("Hello ", ' '));
 	//testsplit(ft_split(" Hello", ' '));
-	testsplit(ft_split("     ", ' '));
-	testsplit(ft_split("", ' '));
+	//testsplit(ft_split("     ", ' '));
+	//testsplit(ft_split("", ' '));
+	testsplit(ft_split("a", ' '));
 	return (0);
 }*/
