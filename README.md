@@ -14,14 +14,23 @@ Basic rules:
 there are two stacks a and b.
 
 pb: push the top element from stack a to b;
+
 pa：push the top element from stack b to a;
+
 ra：rotate stack a;
+
 rb: rotate stack b;
+
 rr: rotate two stacks together;
+
 rra：reverse rotate stack a;
+
 rrb: reverse rotate stack b;
+
 rrr: reverse rotate two stacks together;
+
 sa: swap top two elements from stack a;
+
 sb: swap top two elements from stack b;
 
 The algorithm is inspired by A. Yigit Ogun's turkish algorithm, with some improvement to achieve better performance.
