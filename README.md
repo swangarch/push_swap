@@ -8,7 +8,7 @@ push_swap takes series of numbers as arguments, and print the instruction on std
 
 chekcer takes the same numbers, and take in stdin the instructions to check if these instructions can actually sort the stack, then print "OK\n" or "KO\n"
 
-The program has to handle input error, if input is not integer, the program should display "Error\n"
+The program has to handle input errors, if input is not integer, the program should display "Error\n"
 
 Basic rules:
 there are two stacks a and b.
