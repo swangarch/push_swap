@@ -40,9 +40,10 @@ The algorithm is inspired by A. Yigit Ogun's turkish algorithm, with some improv
 3. If the stack has more than three elements:
    
      <1> Push elements directly from a to b, only three left, when there is less than 100 numbers.
+   
      <2> Push elements from a to b, with a pre-sorting by divide the numbers into 4 chunks, only three left in a, in descending order, when there is more than 100 numbers.
-4. Sort 3 left elements in stack a.
-5. Iterate from b to calculate the total cost to push a element form b to a in the right position, then push the one with lowest cost until b is empty.
+5. Sort 3 left elements in stack a.
+6. Iterate from b to calculate the total cost to push a element form b to a in the right position, then push the one with lowest cost until b is empty.
 
 I have full score 125 with average 570 instructions to sort 100 numbers, and average 4100 instructions to sort 500 numbers, in the best case, 3800 instructions. 
 The division into 4 chunks improved significantly the performance, when there are more than 100 numbers.
