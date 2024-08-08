@@ -38,6 +38,7 @@ The algorithm is inspired by A. Yigit Ogun's turkish algorithm, with some improv
 1. If the stack a is already sorted, do nothing.
 2. If the stack a contain less than 3 numbers, a independent algorithm will sort it in maximum 2 instructions.
 3. If the stack has more than three elements:
+   
      <1> Push elements directly from a to b, only three left, when there is less than 100 numbers.
      <2> Push elements from a to b, with a pre-sorting by divide the numbers into 4 chunks, only three left in a, in descending order, when there is more than 100 numbers.
 4. Sort 3 left elements in stack a.
