@@ -45,5 +45,7 @@ The algorithm is inspired by A. Yigit Ogun's turkish algorithm, with some improv
 5. Sort 3 left elements in stack a.
 6. Iterate from b to calculate the total cost to push a element form b to a in the right position, then push the one with lowest cost until b is empty.
 
+To achieve maximum score, the maximum steps to sort 100 numbers are 700, and for 500 numbers are 5500.
+
 I have full score 125 with average 570 instructions to sort 100 numbers, and average 4100 instructions to sort 500 numbers, in the best case, 3800 instructions. 
 The division into 4 chunks improved significantly the performance, when there are more than 100 numbers.
